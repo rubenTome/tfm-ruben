@@ -1,0 +1,21 @@
+.active {
+  background: #b53784 !important;
+}
+
+li {
+  margin-right: 10px;
+}
+
+li:hover {
+  background: #e7b1d2;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.nav-link {
+  color: black;
+}
+
+ul {
+  margin-right: 30px;
+}
