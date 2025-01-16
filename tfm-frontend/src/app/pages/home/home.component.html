@@ -1,5 +1,45 @@
 <div class="p-5">
-    <h1 class="text-center">Configurar un nuevo experimento</h1>
-    <form>
+    <h1 class="text-center mb-5">Configurar un nuevo experimento</h1>
+    <form class="row" [formGroup]="paramsForm">
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <label for="dataset">Conjunto de datos: </label>
+            <select class="form-control" id="dataset" formControlName="dataset">
+                <option *ngFor="let dataset of datasetsOptions">
+                    {{dataset}}
+                </option>
+            </select>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <label for="nFeatures">Número de características objetivo: </label>
+            <select class="form-control" id="nFeatures" formControlName="nFeatures">
+                <option *ngFor="let nFeature of nFeaturesOptions">
+                    {{nFeature}}
+                </option>
+            </select>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <label for="precision">Precisión: </label>
+            <select class="form-control" id="precision" formControlName="precision">
+                <option *ngFor="let precision of precisionOptions">
+                    {{precision}}
+                </option>
+            </select>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4 form-check form-switch">
+            <input class="form-check-input" id="codecarbon" type="checkbox" formControlName="codecarbon">
+            <label class="form-check-label" for="codecarbon">Medir emisiones de Co2</label>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <label for="kFolds">Número de folds: </label>
+            <input class="form-control" id="kFolds" type="number" formControlName="kFolds">
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <label for="reps">Número de repeticiones por fold: </label>
+            <input class="form-control" id="reps" type="number" formControlName="reps">
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <label for="alpha">Valor de alfa: </label>
+            <input class="form-control" id="alpha" type="number" [step]=".05" formControlName="alpha">
+        </div>
     </form>
 </div>
