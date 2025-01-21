@@ -1,7 +1,23 @@
-.form-check-input:checked {
-    background-color: #b53784;
+button.boton__reset {
+    margin-right: 100px;
 }
 
-/* option {
+button.btn-outline-primary {
+    border-color: #b53784;
+    color: #b53784;
+}
+
+button.btn-outline-primary:hover {
     background: #b53784;
-} */
+    color: white;
+}
+
+button.btn-outline-primary:focus-visible {
+    background-color: #b53784;
+    box-shadow: 0 0 0 0.25rem #e7b1d2 !important;
+    color: white;
+}
+
+span.material-icons-outlined {
+    margin-right: 10px;
+}

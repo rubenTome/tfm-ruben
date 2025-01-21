@@ -20,6 +20,12 @@ li:hover {
   color: black;
 }
 
+.nav-link:focus-visible {
+  border-radius: 5px;
+  box-shadow: 0 0 0 0.25rem #e7b1d2 !important;
+  border: none;
+}
+
 ul {
   margin-right: 30px;
 }

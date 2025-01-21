@@ -1,45 +1,97 @@
 <div class="p-5">
     <h1 class="text-center mb-5">Configurar un nuevo experimento</h1>
     <form class="row" [formGroup]="paramsForm">
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <label for="dataset">Conjunto de datos: </label>
-            <select class="form-control" id="dataset" formControlName="dataset">
-                <option *ngFor="let dataset of datasetsOptions">
-                    {{dataset}}
-                </option>
-            </select>
+        <div ngbAccordion class="acordeon col-12 mt-4">
+            <div ngbAccordionItem [collapsed]="false">
+                <h2 ngbAccordionHeader>
+                    <button ngbAccordionButton>
+                        <span class="material-icons-outlined">settings</span>
+                        Configuración básica
+                    </button>
+                </h2>
+                <div ngbAccordionCollapse>
+                    <div ngbAccordionBody>
+                        <ng-template>
+                            <div class="row">
+                                <div class="col-12 col-lg-4 mb-4">
+                                    <label for="dataset">Conjunto de datos: </label>
+                                    <select class="form-control" id="dataset" formControlName="dataset">
+                                        <option *ngFor="let dataset of datasetsOptions">
+                                            {{dataset}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-4 mb-4">
+                                    <label for="nFeatures">Número de características objetivo: </label>
+                                    <input class="form-control" id="nFeatures" type="number"
+                                        formControlName="nFeatures">
+                                </div>
+                                <div class="col-12 col-lg-4 mb-4">
+                                    <label for="precision">Precisión: </label>
+                                    <select class="form-control" id="precision" formControlName="precision">
+                                        <option *ngFor="let precision of precisionOptions">
+                                            {{precision}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <label for="nFeatures">Número de características objetivo: </label>
-            <select class="form-control" id="nFeatures" formControlName="nFeatures">
-                <option *ngFor="let nFeature of nFeaturesOptions">
-                    {{nFeature}}
-                </option>
-            </select>
+        <div ngbAccordion class="acordeon col-12 mb-4 mt-4">
+            <div ngbAccordionItem>
+                <h2 ngbAccordionHeader>
+                    <button ngbAccordionButton>
+                        <span class="material-icons-outlined">science</span>
+                        Configuración avanzada
+                    </button>
+                </h2>
+                <div ngbAccordionCollapse>
+                    <div ngbAccordionBody>
+                        <ng-template>
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                    <label for="kFolds">Número de folds: </label>
+                                    <input class="form-control" id="kFolds" type="number" formControlName="kFolds">
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                    <label for="reps">Número de repeticiones por fold: </label>
+                                    <input class="form-control" id="reps" type="number" formControlName="reps">
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                    <label for="alpha">Valor de alfa: </label>
+                                    <input class="form-control" id="alpha" type="number" [step]=".05"
+                                        formControlName="alpha">
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                    <label for="wait">Número de ciclos máximos sin mejora: </label>
+                                    <input class="form-control" id="wait" type="number" formControlName="wait">
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                    <label for="implementation">Implementación: </label>
+                                    <select class="form-control" id="implementation" formControlName="implementation">
+                                        <option *ngFor="let implementation of implementationOptions">
+                                            {{implementation}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div
+                                    class="col-12 col-md-6 col-lg-4 mb-4 mt-4 form-check form-switch d-flex align-items-center justify-content-center">
+                                    <input class="form-check-input d-flex" id="codecarbon" type="checkbox"
+                                        formControlName="codecarbon">
+                                    <label class="form-check-label" for="codecarbon">Medir emisiones de Co2</label>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <label for="precision">Precisión: </label>
-            <select class="form-control" id="precision" formControlName="precision">
-                <option *ngFor="let precision of precisionOptions">
-                    {{precision}}
-                </option>
-            </select>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-4 form-check form-switch">
-            <input class="form-check-input" id="codecarbon" type="checkbox" formControlName="codecarbon">
-            <label class="form-check-label" for="codecarbon">Medir emisiones de Co2</label>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <label for="kFolds">Número de folds: </label>
-            <input class="form-control" id="kFolds" type="number" formControlName="kFolds">
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <label for="reps">Número de repeticiones por fold: </label>
-            <input class="form-control" id="reps" type="number" formControlName="reps">
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <label for="alpha">Valor de alfa: </label>
-            <input class="form-control" id="alpha" type="number" [step]=".05" formControlName="alpha">
+        <div class="col-12 mb-5 d-flex justify-content-end div__botones">
+            <button class="btn btn-lg btn-outline-secondary mr-4 boton__reset" (click)="resetForm()">Resetear</button>
+            <button class="btn btn-lg btn-outline-primary" (click)="sendForm()">Comenzar experimento</button>
         </div>
     </form>
 </div>

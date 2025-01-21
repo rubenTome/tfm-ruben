@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+.form-check-input:checked {
+    background-color: #b53784;
+    border-color: #b53784;
+}
+
+select:focus, input:focus, button[ngbAccordionButton]:focus {
+    border-color: #b53784 !important;
+    box-shadow: 0 0 0 0.25rem #e7b1d2 !important;
+}
+
+option:hover {
+    background-color: #b53784 !important;
+}
+
+input.form-check-input {
+    margin-right: 10px;
+}
+
+div[ngbAccordion] {
+    color: #b53784;
+}
+
+button[ngbAccordionButton] {
+    background: white !important;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #212529;
+}
+
+button[ngbAccordionButton]:hover {
+    border: 1px solid #b53784;
+    color: white;
+    background: #b53784 !important;
+    border: none;
+}

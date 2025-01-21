@@ -1,10 +1,37 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NgbProgressbarConfig, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-ejecucion',
-  imports: [],
+  imports: [NgbProgressbarModule],
   templateUrl: './ejecucion.component.html',
   styleUrl: './ejecucion.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EjecucionComponent { }
+export class EjecucionComponent {
+
+  estadosPosibles: string[] = [
+    "error",
+    "ejecucion",
+    "finalizado"
+  ]
+
+  estado: string = this.estadosPosibles[1];
+  progreso: number = 50;
+
+  dataset: string = "MOCK";
+  nFeatures: string = "MOCK";
+  precision: string = "MOCK";
+  kFolds: string = "MOCK";
+  reps: string = "MOCK";
+  alpha: string = "MOCK";
+  wait: string = "MOCK";
+  implementation: string = "MOCK";
+  codecarbon: boolean = true;
+
+  verUltimoExp() {
+    console.log("Ver último experimento");
+  }
+
+}
