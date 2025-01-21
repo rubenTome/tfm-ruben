@@ -19,6 +19,7 @@ export class EjecucionComponent {
 
   estado: string = this.estadosPosibles[1];
   progreso: number = 50;
+  mensajeError: string = "Error en la ejecución";
 
   dataset: string = "MOCK";
   nFeatures: string = "MOCK";
@@ -29,6 +30,10 @@ export class EjecucionComponent {
   wait: string = "MOCK";
   implementation: string = "MOCK";
   codecarbon: boolean = true;
+
+  reintentar() {
+    console.log("Reintentar");
+  }
 
   verUltimoExp() {
     console.log("Ver último experimento");
