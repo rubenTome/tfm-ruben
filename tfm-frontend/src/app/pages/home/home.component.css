@@ -21,3 +21,10 @@ button.btn-outline-primary:focus-visible {
 span.material-icons-outlined {
     margin-right: 10px;
 }
+
+.div__botones {
+    width: -webkit-fill-available;
+    padding-right: 50px;
+    position: absolute;
+    bottom: 100px;
+}

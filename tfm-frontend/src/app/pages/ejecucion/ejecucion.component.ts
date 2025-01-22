@@ -20,6 +20,7 @@ export class EjecucionComponent {
   estado: string = this.estadosPosibles[1];
   progreso: number = 50;
   mensajeError: string = "Error en la ejecución";
+  mostrarTodo: boolean = false;
 
   dataset: string = "MOCK";
   nFeatures: string = "MOCK";
@@ -30,6 +31,11 @@ export class EjecucionComponent {
   wait: string = "MOCK";
   implementation: string = "MOCK";
   codecarbon: boolean = true;
+
+
+  toggleMostrarTodo() {
+    this.mostrarTodo = !this.mostrarTodo;
+  }
 
   reintentar() {
     console.log("Reintentar");

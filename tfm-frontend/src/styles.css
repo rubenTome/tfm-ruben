@@ -1,3 +1,8 @@
+html {
+    height: -webkit-fill-available;
+    position: relative;
+}
+
 .form-check-input:checked {
     background-color: #b53784;
     border-color: #b53784;
@@ -29,7 +34,6 @@ button[ngbAccordionButton] {
 }
 
 button[ngbAccordionButton]:hover {
-    border: 1px solid #b53784;
     color: white;
     background: #b53784 !important;
     border: none;

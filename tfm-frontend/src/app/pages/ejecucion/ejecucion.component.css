@@ -7,6 +7,19 @@ ngb-progressbar {
   color: #b53784;
 }
 
+.stop__boton {
+  margin-left: 10px;
+  color: #b53784;
+  font-size: 35px;
+}
+
+.stop__boton:hover {
+  cursor: pointer;
+  color: white;
+  background: #b53784;
+  border-radius: 20px;
+}
+
 .header__motivo__error {
   color: #b53784;
   padding-left: 20px;
@@ -21,9 +34,17 @@ ngb-progressbar {
   height: 300px;
 }
 
-span.valores__exp {
+span.valores__exp, .masInfo {
   color: #b53784;
   font-weight: 700;
+}
+
+.masInfo {
+  font-size: large;
+  font-weight: 700;
+  cursor: pointer;
+  width: fit-content;
+  text-decoration: underline;
 }
 
 button.btn-outline-primary {
