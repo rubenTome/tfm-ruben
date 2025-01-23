@@ -12,6 +12,6 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 export class HistorialComponent {
   nPaginas = 1
   irDetalle() {
-    console.log("Ir a detalle")
+    window.location.href = "detalle";
   }
 }

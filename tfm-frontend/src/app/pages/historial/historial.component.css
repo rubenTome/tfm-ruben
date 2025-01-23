@@ -3,7 +3,8 @@
 }
 
 div[ngbScrollSpy] {
-  height: 650px;
+  height: 760px;
+  padding-bottom: 100px !important;
 }
 
 ::-webkit-scrollbar {
@@ -11,6 +12,8 @@ div[ngbScrollSpy] {
 }
 
 ::-webkit-scrollbar-track {
+  margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 10px;
   background-color: #edc4dd;
 }

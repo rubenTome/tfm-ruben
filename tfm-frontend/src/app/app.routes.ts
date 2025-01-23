@@ -16,5 +16,13 @@ export const routes: Routes = [
     {
         path: 'manual',
         loadComponent: () => import('./pages/manual/manual.component').then(m => m.ManualComponent)
+    },
+    {
+        path: 'detalle',
+        loadComponent: () => import('./pages/detalle/detalle.component').then(m => m.DetalleComponent)
+    },
+    {
+        path: "**",
+        redirectTo: '',
     }
 ];
