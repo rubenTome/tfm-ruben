@@ -66,6 +66,7 @@ ngb-pagination ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
 button.btn-outline-primary {
   border-color: #b53784;
   color: #b53784;
+  background: white;
 }
 
 button.btn-outline-primary:hover {

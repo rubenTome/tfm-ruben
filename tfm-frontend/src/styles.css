@@ -3,6 +3,12 @@ html {
     position: relative;
 }
 
+app-footer {
+    width: -webkit-fill-available;
+    position: absolute;
+    bottom: 0px;
+}
+
 .form-check-input:checked {
     background-color: #b53784;
     border-color: #b53784;
