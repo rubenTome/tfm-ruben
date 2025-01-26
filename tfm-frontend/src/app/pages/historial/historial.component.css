@@ -2,6 +2,10 @@
   border-radius: 0px !important;
 }
 
+ngb-pagination {
+  z-index: 1;
+}
+
 div[ngbScrollSpy] {
   height: 760px;
   padding-bottom: 100px !important;
