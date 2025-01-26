@@ -8,10 +8,9 @@ import sys
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.metrics import balanced_accuracy_score
 import time
+import shutil
 
-results_dir = "final_results_gorry"
-
-
+results_dir = "../../tfm-db/last_experiment/results"
 
 def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, net, codecarbon_tracking):
     #conversions from string to int
@@ -27,9 +26,9 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
     if net == "linear":
         net = None
 
-
-    if not os.path.exists(results_dir):
-        os.mkdir(results_dir)
+    if os.path.exists(results_dir):
+        shutil.move(results_dir, "../../tfm-db/history/experiment_" + str(time.time()))
+    os.mkdir(results_dir)
     
     print("Precision:", precision)
     kfold = RepeatedStratifiedKFold(n_splits=k_folds, n_repeats=N, random_state=42)
