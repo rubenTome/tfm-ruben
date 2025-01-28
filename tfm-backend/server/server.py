@@ -6,6 +6,5 @@ app = FastAPI()
 
 @app.get("/experiment/")
 async def expermient(dataset: str, nFeat: str, prec: str, kFolds: str, reps: str, alpha: str, wait: str, implementation: str, codecarbon: str):
-    #run_experiment(dataset, nFeat, prec, kFolds, reps, alpha, wait, implementation, codecarbon)
-    print([dataset, nFeat, prec, kFolds, reps, alpha, wait, implementation, codecarbon])
+    run_experiment(dataset, nFeat, prec, kFolds, reps, alpha, wait, implementation, codecarbon)
     return {"success": [dataset, nFeat, prec, kFolds, reps, alpha, wait, implementation, codecarbon]}

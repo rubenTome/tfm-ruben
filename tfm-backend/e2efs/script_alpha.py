@@ -9,10 +9,11 @@ from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.metrics import balanced_accuracy_score
 import time
 import shutil
+import json
 
 results_dir = "../../tfm-db/last_experiment/results"
 
-def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, net, codecarbon_tracking):
+def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, network, codecarbon_tracking):
     #conversions from string to int
     n_features_to_select = int(n_features_to_select)
     k_folds = int(k_folds)
@@ -25,14 +26,35 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         codecarbon_tracking = True
     else:
         codecarbon_tracking = False
-    if net == "lineal":
+    net = "conv"
+    if network == "lineal":
         net = None
-    else:
-        net = "conv"
 
     if os.path.exists(results_dir):
         shutil.move(results_dir, "../../tfm-db/history/experiment_" + str(time.time()))
     os.mkdir(results_dir)
+
+    #CREATE DICTIONARY WITH EXECUTION INFO, AND WRITING TO A JSON FILE
+    exec_info = {
+        "ds": ds,
+        "n_features_to_select": n_features_to_select,
+        "precision": precision,
+        "k_folds": k_folds,
+        "N": N,
+        "fi": fi,
+        "wait": wait,
+        "net": network,
+        "codecarbon_tracking": codecarbon_tracking,
+
+        "status": "ejecucion",
+        "progress": 0,
+        "ranking": [],
+    }
+    max_progress = k_folds * N
+    json_exec_info = json.dumps(exec_info)
+    json_file = open(results_dir + "../../exec_info.json", "w")
+    json_file.write(json_exec_info)
+    json_file.close()
     
     print("Precision:", precision)
     kfold = RepeatedStratifiedKFold(n_splits=k_folds, n_repeats=N, random_state=42)
@@ -165,6 +187,17 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         if j > 0:
             df.loc[j] = [round(metrics["test_accuracy"], 4), round(balanced_acc, 4), nf, fi, emissions, duration]
             df.to_csv(directory + "/csv/" + name + ".csv", index=False)
+        exec_info.update({"progress": int(j / max_progress * 100)})
+        json_exec_info = json.dumps(exec_info)
+        json_file = open(results_dir + "/exec_info.json", "w")
+        json_file.write(json_exec_info)
+        json_file.close()
         
     #write stats and global emissions
     f.write(df.describe().to_string())
+    exec_info.update({"status": "finalizado"})
+    exec_info.update({"progress": 100})
+    json_exec_info = json.dumps(exec_info)
+    json_file = open(results_dir + "/exec_info.json", "w")
+    json_file.write(json_exec_info)
+    json_file.close()
