@@ -19,12 +19,16 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
     N = int(N)
     fi = float(fi)
     wait = int(wait)
-    if codecarbon_tracking == "codecarbon_tracking":
+    if precision == "16":
+        precision = "16-true"
+    if codecarbon_tracking == "usar_codecarbon":
         codecarbon_tracking = True
     else:
         codecarbon_tracking = False
-    if net == "linear":
+    if net == "lineal":
         net = None
+    else:
+        net = "conv"
 
     if os.path.exists(results_dir):
         shutil.move(results_dir, "../../tfm-db/history/experiment_" + str(time.time()))

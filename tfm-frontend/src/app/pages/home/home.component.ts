@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {ReactiveFormsModule, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { GetExperimentoService } from '../../services/get-experimento.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,10 @@ import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './home.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class HomeComponent {
+  constructor(private getExperimentoService:GetExperimentoService) { }
+  
   datasetsOptions = [
     "",
     "Colon", 
@@ -24,9 +28,9 @@ export class HomeComponent {
   ]
   precisionOptions = [
     "",
-    "16",
-    "32",
-    "64",
+    "16-bits en punto flotante",
+    "32-bits en punto flotante",
+    "64-bits en punto flotante",
   ]
   implementationOptions = [
     "Lineal",
@@ -41,12 +45,14 @@ export class HomeComponent {
     reps: new FormControl(5),
     alpha: new FormControl(0.25),
     wait: new FormControl(25),
-    implementation: new FormControl<string>(this.implementationOptions[1]),
+    implementation: new FormControl<string>(this.implementationOptions[0]),
     codecarbon: new FormControl(true),
   });
 
   sendForm() {
-    console.log(this.paramsForm.value)
+    this.getExperimentoService.sendForm(this.paramsForm.value)
+    console.log(this.getExperimentoService.getExperimentParams())
+    window.location.href = "/home/ejecucion-actual"
   }
 
   resetForm() {

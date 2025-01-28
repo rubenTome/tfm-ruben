@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NgbProgressbarConfig, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+import { AfterContentChecked, ChangeDetectionStrategy, Component } from '@angular/core';
+import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+import { GetExperimentoService } from '../../services/get-experimento.service';
 
 
 @Component({
@@ -10,6 +11,8 @@ import { NgbProgressbarConfig, NgbProgressbarModule } from '@ng-bootstrap/ng-boo
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EjecucionComponent {
+
+  constructor(private getExperimentoService: GetExperimentoService) { }
 
   estadosPosibles: string[] = [
     "error",
@@ -22,6 +25,7 @@ export class EjecucionComponent {
   mensajeError: string = "Error en la ejecución";
   mostrarTodo: boolean = false;
 
+  //como acceder a la variable del servicio ???????
   dataset: string = "MOCK";
   nFeatures: string = "MOCK";
   precision: string = "MOCK";
