@@ -3,7 +3,7 @@
 }
 
 ngb-pagination {
-  z-index: 1;
+  z-index: 3000;
 }
 
 div[ngbScrollSpy] {

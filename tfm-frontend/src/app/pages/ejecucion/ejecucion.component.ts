@@ -1,6 +1,5 @@
 import { AfterContentChecked, ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
-import { GetExperimentoService } from '../../services/get-experimento.service';
 import * as exec_info from "../../../../../tfm-db/exec_info.json"
 
 
@@ -13,7 +12,7 @@ import * as exec_info from "../../../../../tfm-db/exec_info.json"
 })
 export class EjecucionComponent {
 
-  constructor(private getExperimentoService: GetExperimentoService) { }
+  constructor() { }
 
   estadosPosibles: string[] = [
     "error",
@@ -26,7 +25,6 @@ export class EjecucionComponent {
   status: string = exec_info.status;
   mostrarTodo: boolean = false;
 
-  //como acceder a la variable del servicio ???????
   dataset: string = exec_info.ds.toString();
   nFeatures: string = exec_info.n_features_to_select.toString();
   precision: string = exec_info.precision.toString().slice(0, 2) + "-bits coma flotante";
@@ -36,6 +34,7 @@ export class EjecucionComponent {
   wait: string = exec_info.wait.toString();
   implementation: string = exec_info.net;
   codecarbon: boolean = exec_info.codecarbon_tracking;
+  errorMensaje: string = exec_info.errorMessage.toString()
 
 
   toggleMostrarTodo() {

@@ -4,7 +4,7 @@
             <ngb-progressbar class="col-12" type="danger" [value]="progreso" [showValue]="false"/>
         }
         @else if (status == estadosPosibles[1]) {
-            <ngb-progressbar class="col-12" type="secondary" [animated]="true" [striped]="true" [value]="progreso" [showValue]="true"/>
+            <ngb-progressbar class="col-12" type="success" [animated]="true" [striped]="true" [value]="progreso" [showValue]="true"/>
         }
         @else if (status == estadosPosibles[2]) {
             <ngb-progressbar class="col-12" type="success" [value]="100" [showValue]="false"/>
@@ -16,7 +16,7 @@
             @else if (status == estadosPosibles[1]) {
                 <h1 class="col-12 mb-5 d-flex align-items-center justify-content-center">status del experimento: 
                     <span class="text-en-ejec">en ejecución</span>
-                    <span class="material-icons-outlined stop__boton">stop_circle</span>
+                    <span class="material-icons-outlined stop__boton" title="Parar ejecución actual">stop_circle</span>
                 </h1>
             }
             @else if (status == estadosPosibles[2]) {
@@ -24,9 +24,9 @@
             }
             @if (status == estadosPosibles[0]) {
                 <div class="mb-5">
-                    <h5 class="header__motivo__error">Motivo del error: MOCK</h5>
+                    <h5 class="header__motivo__error">Motivo del error:</h5>
                     <div class="motivo__error">
-                        {{status}}
+                        {{errorMensaje}}
                     </div>
                 </div>
                 <div class="col-12 text-center mt-5">
@@ -96,5 +96,8 @@
                 </div>          
             }
         </div>
+    }
+    @else {
+        <h1 class="col-12 text-center mt-5">No se ha iniciado ningún experimento</h1>
     }
 </div>
