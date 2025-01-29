@@ -40,3 +40,6 @@ tfm-frontend/typings
 # System files
 tfm-frontend/.DS_Store
 tfm-frontend/Thumbs.db
+
+tfm-backend/*/__pycache__/
+tfm-backend/server/lightning_logs/
