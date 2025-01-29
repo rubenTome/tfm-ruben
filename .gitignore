@@ -43,3 +43,5 @@ tfm-frontend/Thumbs.db
 
 tfm-backend/*/__pycache__/
 tfm-backend/server/lightning_logs/
+tfm-db/history/*
+tfm-db/last_experiment/*

@@ -16,7 +16,7 @@ results_dir = "../../tfm-db/last_experiment/results"
 def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, network, codecarbon_tracking):
     exec_info = {}
     try:
-        startTime = time.time()
+        startTime = int(time.time())
         rankingMean = np.array([])
         #conversions from string to int
         n_features_to_select = int(n_features_to_select)
@@ -53,6 +53,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             "status": "ejecucion",
             "errorMessage": "",
             "progress": 0,
+            "id": startTime
         }
         
         max_progress = k_folds * N
@@ -227,7 +228,6 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             "codecarbon_tracking": codecarbon_tracking,
 
             "results": df.to_dict(),
-            "stats": df.describe().to_dict(),
 
             "ranking": rankingMean
         }

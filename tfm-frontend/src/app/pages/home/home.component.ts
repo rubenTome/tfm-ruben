@@ -51,7 +51,6 @@ export class HomeComponent {
 
   sendForm() {
     this.getExperimentoService.sendForm(this.paramsForm.value)
-    console.log(this.getExperimentoService.getExperimentParams())
     window.location.href = "/home/ejecucion-actual"
   }
 

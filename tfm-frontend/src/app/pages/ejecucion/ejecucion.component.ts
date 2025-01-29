@@ -46,7 +46,7 @@ export class EjecucionComponent {
   }
 
   verUltimoExp() {
-    console.log("Ver último experimento");
+    window.location.href = "/experimentos/" + exec_info.id;
   }
 
 }
