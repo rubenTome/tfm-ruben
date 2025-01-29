@@ -1,0 +1,42 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+tfm-frontend/dist
+tfm-frontend/tmp
+tfm-frontend/out-tsc
+tfm-frontend/bazel-out
+
+# Node
+tfm-frontend/node_modules
+tfm-frontend/npm-debug.log
+tfm-frontend/yarn-error.log
+
+# IDEs and editors
+tfm-frontend/.idea/
+tfm-frontend/.project
+tfm-frontend/.classpath
+tfm-frontend/.c9/
+tfm-frontend/*.launch
+tfm-frontend/.settings/
+tfm-frontend/*.sublime-workspace
+
+# Visual Studio Code
+tfm-frontend/.vscode/*
+tfm-frontend/!.vscode/settings.json
+tfm-frontend/!.vscode/tasks.json
+tfm-frontend/!.vscode/launch.json
+tfm-frontend/!.vscode/extensions.json
+tfm-frontend/.history/*
+
+# Miscellaneous
+tfm-frontend/.angular/cache
+tfm-frontend/.sass-cache/
+tfm-frontend/connect.lock
+tfm-frontend/coverage
+tfm-frontend/libpeerconnection.log
+tfm-frontend/testem.log
+tfm-frontend/typings
+
+# System files
+tfm-frontend/.DS_Store
+tfm-frontend/Thumbs.db

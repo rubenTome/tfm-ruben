@@ -14,7 +14,10 @@ import json
 results_dir = "../../tfm-db/last_experiment/results"
 
 def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, network, codecarbon_tracking):
+    exec_info = {}
     try:
+        startTime = time.time()
+        rankingMean = np.array([])
         #conversions from string to int
         n_features_to_select = int(n_features_to_select)
         k_folds = int(k_folds)
@@ -50,8 +53,8 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             "status": "ejecucion",
             "errorMessage": "",
             "progress": 0,
-            "ranking": [],
         }
+        
         max_progress = k_folds * N
         json_exec_info = json.dumps(exec_info)
         json_file = open(results_dir + "/../../exec_info.json", "w")
@@ -182,6 +185,10 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             print('MASK:', mask)
             ## GET THE RANKING
             ranking = model.get_ranking()
+            if len(rankingMean) == 0:
+                rankingMean = np.array(ranking)
+            else:
+                rankingMean += np.array(ranking)
             print('RANKING:', ranking)
             nf = model.get_nfeats()
             print("NUMBER OF FEATURES:", nf)
@@ -203,7 +210,32 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         json_file = open(results_dir + "/../../exec_info.json", "w")
         json_file.write(json_exec_info)
         json_file.close()
-        shutil.copytree(results_dir, "../../tfm-db/history/experiment_" + str(time.time()))
+        historyDir = "../../tfm-db/history/experiment_" + str(startTime)
+        shutil.copytree(results_dir, historyDir)
+        #WRITE RESULTS TO A JSON FILE TO HISTORIC
+        rankingMean = rankingMean / (N * k_folds)
+        rankingMean = rankingMean.tolist()
+        results_dict = {
+            "dataset": ds,
+            "n_features_to_select": n_features_to_select,
+            "precision": precision,
+            "k_folds": k_folds,
+            "N": N,
+            "fi": fi,
+            "wait": wait,
+            "net": network,
+            "codecarbon_tracking": codecarbon_tracking,
+
+            "results": df.to_dict(),
+            "stats": df.describe().to_dict(),
+
+            "ranking": rankingMean
+        }
+        results_json = json.dumps(results_dict)
+        results_json_file = open(historyDir + "/results_" + str(startTime) + ".json", "w")
+        results_json_file.write(results_json)
+        results_json_file.close()
+
     except  Exception as e:
         print(e)
         exec_info.update({"status": "error"})
