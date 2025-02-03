@@ -1,5 +1,51 @@
-<div class="mt-5">
-    <h1 class="text-center">Resultados del experimento con id: 
-        <span class="id__span">{{id}}</span>
-    </h1>
-</div>,
+<div ngbScrollSpy #spy="ngbScrollSpy">
+    <div class="mt-5">
+        <h1 class="text-center">Resultados del experimento con id:
+            <span class="id__span">{{id}}</span>
+        </h1>
+        <div class="row mt-5 mx-5 p-4">
+            <div class="col-12 py-2 d-flex justify-content-between align-items-center">
+                <h5 class="m-0">Conjunto de datos: </h5>
+                <span class="valores__exp">{{detalle["dataset"]}}</span>
+            </div>
+            <div class="col-12 py-2 d-flex justify-content-between">
+                <h5 class="m-0">Número de características objetivo: </h5>
+                <span class="valores__exp">{{detalle["n_features_to_select"]}}</span>
+            </div>
+            <div class="col-12 py-2 d-flex justify-content-between">
+                <h5 class="m-0">Precisión numérica del algoritmo: </h5>
+                <span class="valores__exp">{{detalle["precision"]}}</span>
+            </div>
+            <div class="col-12 py-2 d-flex justify-content-between">
+                <h5 class="m-0">Número de folds: </h5>
+                <span class="valores__exp">{{detalle["k_folds"]}}</span>
+            </div>
+            <div class="col-12 py-2 d-flex justify-content-between">
+                <h5 class="m-0">Número de repeticiones por fold: </h5>
+                <span class="valores__exp">{{detalle["N"]}}</span>
+            </div>
+            <div class="col-12 py-2 d-flex justify-content-between">
+                <h5 class="m-0">Valor de alfa: </h5>
+                <span class="valores__exp">{{detalle["fi"]}}</span>
+            </div>
+            <div class="col-12 py-2 d-flex justify-content-between">
+                <h5 class="m-0">Número de ciclos máximos sin mejora: </h5>
+                <span class="valores__exp">{{detalle["wait"]}}</span>
+            </div>
+            <div class="col-12 py-2 d-flex justify-content-between">
+                <h5 class="m-0">Implementación del clasificador: </h5>
+                <span class="valores__exp">{{detalle["net"]}}</span>
+            </div>
+            <div class="col-12 d-flex justify-content-between py-2">
+                <h5 class="m-0">¿Se ha usado codecarbon?: </h5>
+                @if(detalle["codecarbon_tracking"]) {
+                <span class="valores__exp">Sí</span>
+                }
+                @else {
+                <span class="valores__exp">No</span>
+                }
+            </div>
+        </div>
+        <app-bar-plot></app-bar-plot>
+    </div>
+</div>

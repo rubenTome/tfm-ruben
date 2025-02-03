@@ -16,11 +16,7 @@ export class GetExperimentoService {
   }
 
   getDetalle(detalle: any): any {
-    this.http.get(`http://127.0.0.1:8000/detalle?id=${detalle}`
-    ).subscribe(result => {
-        console.log(result)
-        return result;
-    });
+    return this.http.get(`http://127.0.0.1:8000/detalle?id=${detalle}`);
   }
 
 }

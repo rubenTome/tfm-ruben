@@ -1,3 +1,13 @@
 .id__span {
   color: #b53784;
 }
+
+span.valores__exp {
+  color: #b53784;
+  font-weight: 700;
+}
+
+div.row {
+  border: 3px solid #b53784;
+  border-radius: 50px;
+}

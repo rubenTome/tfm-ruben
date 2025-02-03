@@ -44,3 +44,24 @@ button[ngbAccordionButton]:hover {
     background: #b53784 !important;
     border: none;
 }
+
+div[ngbScrollSpy] {
+    height: 760px;
+    padding-bottom: 100px !important;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: #edc4dd;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #b53784;
+  }
