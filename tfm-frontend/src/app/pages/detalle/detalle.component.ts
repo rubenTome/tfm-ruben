@@ -21,8 +21,6 @@ export class DetalleComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getExperimentoService.getDetalle(this.id).subscribe((response: any) => {
       this.detalle = response;
-      console.log(this.detalle)
-      console
     });
   }
 }

@@ -22,3 +22,7 @@ async def detalle(id: str):
     selectedFile = open(historyPath + "/" + selectedDir + "/results_" + id + ".json", "r")
     dataString = json.loads(selectedFile.read())
     return dataString
+
+@app.get("/historial/")
+async def history():
+    return (["1738152118", "1738152118", "1738152118", "1738152118", "1738152118"])

@@ -1,4 +1,4 @@
-import { AfterContentChecked, ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import * as exec_info from "../../../../../tfm-db/exec_info.json"
 

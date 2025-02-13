@@ -34,7 +34,7 @@ export class HomeComponent {
   ]
   implementationOptions = [
     "Lineal",
-    "Convolucional"
+    "Lineal v2 (capa convolucional)"
   ]
 
   paramsForm = new FormGroup({

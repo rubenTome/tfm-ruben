@@ -23,6 +23,18 @@ div[ngbaccordionbody]  {
   width: -webkit-fill-available;
 }
 
+.span__id {
+  color: #b53784;
+  font-weight: 700;
+  margin-left: 5px;
+  margin-right: 25px;
+}
+
+button[ngbAccordionButton]:hover > .span__id  {
+  color: white;
+  font-weight: 700;
+}
+
 ngb-pagination::ng-deep ul>li:not(.active)>a {
   color: #b53784 !important;
   border: 1px solid #b53784 !important;

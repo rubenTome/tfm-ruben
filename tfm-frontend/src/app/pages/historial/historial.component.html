@@ -1,88 +1,27 @@
 <div ngbScrollSpy #spy="ngbScrollSpy" class="p-5">
     <div ngbAccordion class="acordeon">
-        <div ngbAccordionItem>
-            <h2 ngbAccordionHeader>
-                <button ngbAccordionButton>
-                    MOCK
-                </button>
-            </h2>
-            <div ngbAccordionCollapse>
-                <div ngbAccordionBody>
-                    <ng-template>
-                        <div class="p-3 d-flex align-items-center justify-content-between">
-                            <span>MOCK</span>
-                            <button class="btn btn-lg btn-outline-primary mr-4" (click)="irDetalle()">Más
-                                detalles</button>
-                        </div>
-                    </ng-template>
-                </div>
-            </div>
-        </div>
-        <div ngbAccordionItem>
-            <h2 ngbAccordionHeader>
-                <button ngbAccordionButton>
-                    MOCK
-                </button>
-            </h2>
-            <div ngbAccordionCollapse>
-                <div ngbAccordionBody>
-                    <div class="p-3 d-flex align-items-center justify-content-between">
-                        <span>MOCK</span>
-                        <button class="btn btn-lg btn-outline-primary mr-4" (click)="irDetalle()">Más
-                            detalles</button>
+        @for (exp of history; track $index) {
+            <div ngbAccordionItem>
+                <h2 ngbAccordionHeader>
+                    <button ngbAccordionButton>
+                        Experimento
+                        <span class="span__id">{{exp}}</span>
+                        (Fecha de ejecución: {{getFecha(exp)}})
+                    </button>
+                </h2>
+                <div ngbAccordionCollapse>
+                    <div ngbAccordionBody>
+                        <ng-template>
+                            <div class="p-3 d-flex align-items-center justify-content-between">
+                                <span>MOCK</span>
+                                <button class="btn btn-lg btn-outline-primary mr-4" (click)="irDetalle(exp)">Más
+                                    detalles</button>
+                            </div>
+                        </ng-template>
                     </div>
                 </div>
             </div>
-        </div>
-        <div ngbAccordionItem>
-            <h2 ngbAccordionHeader>
-                <button ngbAccordionButton>
-                    MOCK
-                </button>
-            </h2>
-            <div ngbAccordionCollapse>
-                <div ngbAccordionBody>
-                    <div class="p-3 d-flex align-items-center justify-content-between">
-                        <span>MOCK</span>
-                        <button class="btn btn-lg btn-outline-primary mr-4" (click)="irDetalle()">Más
-                            detalles</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ngbAccordionItem>
-            <h2 ngbAccordionHeader>
-                <button ngbAccordionButton>
-                    MOCK
-                </button>
-            </h2>
-            <div ngbAccordionCollapse>
-                <div ngbAccordionBody>
-                    <div class="p-3 d-flex align-items-center justify-content-between">
-                        <span>MOCK</span>
-                        <button class="btn btn-lg btn-outline-primary mr-4" (click)="irDetalle()">Más
-                            detalles</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ngbAccordionItem>
-            <h2 ngbAccordionHeader>
-                <button ngbAccordionButton>
-                    MOCK
-                </button>
-            </h2>
-            <div ngbAccordionCollapse>
-                <div ngbAccordionBody>
-                    <div class="p-3 d-flex align-items-center justify-content-between">
-                        <span>MOCK</span>
-                        <button class="btn btn-lg btn-outline-primary mr-4" (click)="irDetalle()">Más
-                            detalles</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        }
     <!-- <div class="d-flex justify-content-center paginacion__env">
         <ngb-pagination [collectionSize]="50" [(page)]="nPaginas" [directionLinks]="false" />
     </div> -->
