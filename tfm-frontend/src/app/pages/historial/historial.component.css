@@ -27,7 +27,7 @@ div[ngbaccordionbody]  {
   color: #b53784;
   font-weight: 700;
   margin-left: 5px;
-  margin-right: 25px;
+  margin-right: 15px;
 }
 
 button[ngbAccordionButton]:hover > .span__id  {

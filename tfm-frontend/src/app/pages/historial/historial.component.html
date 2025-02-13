@@ -5,16 +5,29 @@
                 <h2 ngbAccordionHeader>
                     <button ngbAccordionButton>
                         Experimento
-                        <span class="span__id">{{exp}}</span>
-                        (Fecha de ejecución: {{getFecha(exp)}})
+                        <span class="span__id">{{exp.id}}</span>
+                        (Fecha de ejecución: {{getFecha(exp.id)}})
                     </button>
                 </h2>
                 <div ngbAccordionCollapse>
                     <div ngbAccordionBody>
                         <ng-template>
                             <div class="p-3 d-flex align-items-center justify-content-between">
-                                <span>MOCK</span>
-                                <button class="btn btn-lg btn-outline-primary mr-4" (click)="irDetalle(exp)">Más
+                                <div class="row w-50">
+                                    <div class="col-12 py-2 d-flex justify-content-between align-items-center w-75">
+                                        <h5 class="m-0">Conjunto de datos: </h5>
+                                        <span class="valores__exp">{{exp.dataset}}</span>
+                                    </div>
+                                    <div class="col-12 py-2 d-flex justify-content-between w-75">
+                                        <h5 class="m-0">Número de características objetivo: </h5>
+                                        <span class="valores__exp">{{exp.n_features_to_select}}</span>
+                                    </div>
+                                    <div class="col-12 py-2 d-flex justify-content-between w-75">
+                                        <h5 class="m-0">Precisión numérica del algoritmo: </h5>
+                                        <span class="valores__exp">{{exp.precision}}</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-lg btn-outline-primary mr-4" (click)="irDetalle(exp.id)">Más
                                     detalles</button>
                             </div>
                         </ng-template>

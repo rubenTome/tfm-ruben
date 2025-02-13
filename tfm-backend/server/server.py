@@ -25,4 +25,18 @@ async def detalle(id: str):
 
 @app.get("/historial/")
 async def history():
+    historyPath = str(pathlib.Path(__file__).parent.resolve()) + "/../../tfm-db/history"
+    files = os.listdir(historyPath)
+    historicFiles = []
+    for i in range(len(files)):
+        expFiles = os.listdir(historyPath + "/" + files[i])
+        for j in range(len(expFiles)):
+            if expFiles[j].endswith(".json"):
+                historicFiles.append(json.load(open(historyPath + "/" + files[i] + "/" + expFiles[j])))
+    return historicFiles
+
+
+
+
+
     return (["1738152118", "1738152118", "1738152118", "1738152118", "1738152118"])

@@ -227,6 +227,8 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             "net": network,
             "codecarbon_tracking": codecarbon_tracking,
 
+            "id": startTime,
+
             "results": df.to_dict(),
 
             "ranking": rankingMean
