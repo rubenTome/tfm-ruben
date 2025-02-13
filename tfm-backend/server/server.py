@@ -34,9 +34,3 @@ async def history():
             if expFiles[j].endswith(".json"):
                 historicFiles.append(json.load(open(historyPath + "/" + files[i] + "/" + expFiles[j])))
     return historicFiles
-
-
-
-
-
-    return (["1738152118", "1738152118", "1738152118", "1738152118", "1738152118"])
