@@ -10,6 +10,7 @@ from sklearn.metrics import balanced_accuracy_score
 import time
 import shutil
 import json
+from pathlib import Path
 
 results_dir = "../../tfm-db/last_experiment/results"
 
@@ -37,9 +38,9 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         if network == "lineal":
             net = None
 
-        if os.path.exists(results_dir):
-            shutil.rmtree(results_dir)
-        os.mkdir(results_dir)
+        if os.path.exists(Path(results_dir)):
+            shutil.rmtree(Path(results_dir))
+        os.mkdir(Path(results_dir))
 
         #CREATE DICTIONARY WITH EXECUTION INFO, AND WRITING TO A JSON FILE
         exec_info = {
@@ -61,7 +62,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         
         max_progress = k_folds * N
         json_exec_info = json.dumps(exec_info)
-        json_file = open(results_dir + "/../../exec_info.json", "w")
+        json_file = open(Path(results_dir + "/../../exec_info.json"), "w")
         json_file.write(json_exec_info)
         json_file.close()
         
@@ -99,11 +100,11 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         else:
             netStr = "_" + net
 
-        if not os.path.exists(results_dir + "/results_" + ds + netStr):
-            os.mkdir(results_dir + "/results_" + ds + netStr)
-        os.mkdir(results_dir + "/results_" + ds + netStr + "/fp" + precision)
-        os.mkdir(results_dir + "/results_" + ds + netStr + "/fp" + precision + "/csv")
-        os.mkdir(results_dir + "/results_" + ds + netStr + "/fp" + precision + "/stats")
+        if not os.path.exists(Path(results_dir + "/results_" + ds + netStr)):
+            os.mkdir(Path(results_dir + "/results_" + ds + netStr))
+        os.mkdir(Path(results_dir + "/results_" + ds + netStr + "/fp" + precision))
+        os.mkdir(Path(results_dir + "/results_" + ds + netStr + "/fp" + precision + "/csv"))
+        os.mkdir(Path(results_dir + "/results_" + ds + netStr + "/fp" + precision + "/stats"))
         
         #set up directory names and csv columns
         df = pd.DataFrame(columns=["test_acc", "balanced_acc", "nfeat", "max_alpha", "emissions", "duration"])
@@ -112,14 +113,12 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         else:
             directory = results_dir + "/results_" + ds + "/fp" + precision
         name = ds + "_a" + str(round(fi, 4)) + "_fp" + precision
-        csv_file = open(directory + "/csv/" + name + ".csv", "w")
-        f = open(directory + "/stats/" + name + ".txt", "w")
+        f = open(Path(directory + "/stats/" + name + ".txt"), "w")
 
         ## LOAD DATA
         dataset = selectedDs.load_dataset()
         raw_data = np.asarray(dataset['raw']['data'])
         raw_label = np.asarray(dataset['raw']['label']).reshape(-1)
-        num_classes = len(np.unique(raw_label))
         normalize = selectedDs.Normalize()
         
         for j, (train_index, test_index) in enumerate(kfold.split(raw_data, raw_label)):
@@ -199,10 +198,10 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             print("ALPHA MAX:", fi)
             if j > 0:
                 df.loc[j] = [round(metrics["test_accuracy"], 4), round(balanced_acc, 4), nf, fi, emissions, duration]
-                df.to_csv(directory + "/csv/" + name + ".csv", index=False)
+                df.to_csv(Path(directory + "/csv/" + name + ".csv"), index=False)
             exec_info.update({"progress": int(j / max_progress * 100)})
             json_exec_info = json.dumps(exec_info)
-            json_file = open(results_dir + "/../../exec_info.json", "w")
+            json_file = open(Path(results_dir + "/../../exec_info.json"), "w")
             json_file.write(json_exec_info)
             json_file.close()
             
@@ -211,11 +210,11 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         exec_info.update({"status": "finalizado"})
         exec_info.update({"progress": 100})
         json_exec_info = json.dumps(exec_info)
-        json_file = open(results_dir + "/../../exec_info.json", "w")
+        json_file = open(Path(results_dir + "/../../exec_info.json"), "w")
         json_file.write(json_exec_info)
         json_file.close()
         historyDir = "../../tfm-db/history/experiment_" + str(startTime)
-        shutil.copytree(results_dir, historyDir)
+        shutil.copytree(Path(results_dir), Path(historyDir))
         #WRITE RESULTS TO A JSON FILE TO HISTORIC
         rankingMean = rankingMean / (N * k_folds)
         rankingMean = rankingMean.tolist()
@@ -240,7 +239,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             "ranking": indexedRankingMean
         }
         results_json = json.dumps(results_dict)
-        results_json_file = open(historyDir + "/results_" + str(startTime) + ".json", "w")
+        results_json_file = open(Path(historyDir + "/results_" + str(startTime) + ".json"), "w")
         results_json_file.write(results_json)
         results_json_file.close()
 
@@ -249,7 +248,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         exec_info.update({"status": "error"})
         exec_info.update({"errorMessage": str(e)})
         json_exec_info = json.dumps(exec_info)
-        json_file = open(results_dir + "/../../exec_info.json", "w")
+        json_file = open(Path(results_dir + "/../../exec_info.json"), "w")
         json_file.write(json_exec_info)
         json_file.close()
         return 
