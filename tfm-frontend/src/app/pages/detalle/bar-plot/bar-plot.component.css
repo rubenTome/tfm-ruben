@@ -1,9 +1,23 @@
+.barplot__comp__env {
+  margin-bottom: 150px !important;
+}
+
+.titulo__barplot {
+  margin-top: 50px;
+  color: #b53784;
+  font-size: xx-large;
+  font-weight: 700;
+  border-bottom: 3px solid #b53784;
+  margin-left: 48px;
+  margin-right: 48px;
+}
+
 .barplot__env {
   width: -webkit-fill-available;
   display: flex;
   align-items: flex-end;
   justify-content: space-evenly;
-  margin-top: 100px;
+  margin-top: 50px;
   margin-right: 50px;
   border-left: 3px solid #752456;
   border-bottom: 3px solid #752456;
@@ -34,6 +48,7 @@
   font-size: 25px;
   font-weight: 700;
   margin-top: 30px;
+  height: 150px;
 }
 
 .y__label {
