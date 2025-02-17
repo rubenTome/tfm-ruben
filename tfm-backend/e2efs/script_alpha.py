@@ -13,6 +13,9 @@ import json
 
 results_dir = "../../tfm-db/last_experiment/results"
 
+def custom_sort(e):
+    return - e[1]
+
 def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, network, codecarbon_tracking):
     exec_info = {}
     try:
@@ -216,6 +219,9 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         #WRITE RESULTS TO A JSON FILE TO HISTORIC
         rankingMean = rankingMean / (N * k_folds)
         rankingMean = rankingMean.tolist()
+        rankingMean = [float(e)/sum(rankingMean) for e in rankingMean]
+        indexedRankingMean = [[k, rankingMean[k]] for k in range(len(rankingMean))]
+        indexedRankingMean.sort(key=custom_sort)
         results_dict = {
             "dataset": ds,
             "n_features_to_select": n_features_to_select,
@@ -231,7 +237,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
 
             "results": df.to_dict(),
 
-            "ranking": rankingMean
+            "ranking": indexedRankingMean
         }
         results_json = json.dumps(results_dict)
         results_json_file = open(historyDir + "/results_" + str(startTime) + ".json", "w")

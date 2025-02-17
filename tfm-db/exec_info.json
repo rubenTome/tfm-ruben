@@ -1,1 +1,1 @@
-{"ds": "colon", "n_features_to_select": 1000, "precision": "16-true", "k_folds": 2, "N": 1, "fi": 0.25, "wait": 25, "net": "lineal", "codecarbon_tracking": false, "status": "finalizado", "errorMessage": "", "progress": 100, "id": 1738152118}
+{"ds": "colon", "n_features_to_select": 1000, "precision": "32", "k_folds": 2, "N": 1, "fi": 0.25, "wait": 25, "net": "lineal", "codecarbon_tracking": false, "status": "finalizado", "errorMessage": "", "progress": 100, "id": 1739536860}

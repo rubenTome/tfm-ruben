@@ -46,6 +46,8 @@
                 }
             </div>
         </div>
-        <app-bar-plot></app-bar-plot>
+        @if(detalle !== null) {
+        <app-bar-plot [detalle]="detalle['ranking']"></app-bar-plot>
+        }
     </div>
 </div>
