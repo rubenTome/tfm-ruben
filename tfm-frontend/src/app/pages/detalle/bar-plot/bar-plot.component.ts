@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './bar-plot.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BarPlotComponent { 
+export class BarPlotComponent implements OnInit{
+  maxFeat: any;
   detalle = input<any>();
-  maxFeat = 10
+  n_feat = input<number>();
+
+  ngOnInit(): void {
+    this.maxFeat = this.n_feat()
+  } 
 }

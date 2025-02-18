@@ -4,7 +4,7 @@
     </div>
     <div class="d-flex align-items-center m-5 mb-0">
         <label for="nFeat">Número de características: </label>
-        <input class="form-control input__nFeat" id="nFeat" type="number" max="10" [(ngModel)]="maxFeat">
+        <input class="form-control input__nFeat" id="nFeat" type="number" min="1" max={{n_feat()}} [(ngModel)]="maxFeat">
     </div>
     <div class="d-flex align-items-center justify-content-start">
         <span class="y__label">Importancia</span>

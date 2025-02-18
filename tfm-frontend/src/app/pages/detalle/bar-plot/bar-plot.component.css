@@ -1,3 +1,20 @@
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 0px;
+  background-color: #edc4dd;
+  border-top: 2px solid #752456;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-color: #752456;
+}
+
 .barplot__comp__env {
   margin-bottom: 150px !important;
 }
@@ -21,6 +38,7 @@
   margin-right: 50px;
   border-left: 3px solid #752456;
   border-bottom: 3px solid #752456;
+  overflow: auto;
 }
 
 .bar__elem {
