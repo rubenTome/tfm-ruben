@@ -1,24 +1,31 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
-import { GetExperimentoService } from '../../services/get-experimento.service';
+import { NgbAccordionModule, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { HttpService } from '../../services/http-service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
   imports: [ReactiveFormsModule, CommonModule, NgbAccordionModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
+  providers: [NgbModalConfig, NgbModal],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class HomeComponent {
-  constructor(private getExperimentoService:GetExperimentoService) { }
-  
+  constructor(private httpService: HttpService, config: NgbModalConfig, private modalService: NgbModal, private http: HttpClient) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
+
+  datasetInfo: any;
+
   datasetsOptions = [
     "",
-    "Colon", 
-    "Leukemia", 
+    "Colon",
+    "Leukemia",
     "Lung",
     "Lymphoma",
     "Gina",
@@ -50,7 +57,7 @@ export class HomeComponent {
   });
 
   sendForm() {
-    this.getExperimentoService.sendForm(this.paramsForm.value)
+    this.httpService.sendForm(this.paramsForm.value)
     window.location.href = "/home/ejecucion-actual"
   }
 
@@ -65,5 +72,24 @@ export class HomeComponent {
       implementation: this.implementationOptions[0],
       codecarbon: true
     })
+  }
+
+  open(content: any) {
+    this.modalService.open(content);
+  }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+      this.datasetInfo = formData;
+    }
+  }
+
+  saveFile() {
+    this.httpService.saveFile(this.datasetInfo).subscribe((response: any) => {
+      this.modalService.dismissAll();
+    });
   }
 }

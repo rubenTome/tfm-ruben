@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NgbAccordionModule, NgbScrollSpyModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { GetExperimentoService } from '../../services/get-experimento.service';
+import { HttpService } from '../../services/http-service.service';
 
 @Component({
   selector: 'app-historial',
@@ -14,10 +14,10 @@ export class HistorialComponent implements OnInit{
   nPaginas = 1
   history: any;
 
-  constructor(private getExperimentoService: GetExperimentoService) { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit() {
-    this.getExperimentoService.getHistory().subscribe((response: any) => {
+    this.httpService.getHistory().subscribe((response: any) => {
       this.history = response;
     });
   }

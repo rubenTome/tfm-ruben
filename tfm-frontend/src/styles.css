@@ -65,3 +65,7 @@ div[ngbScrollSpy] {
     border-radius: 10px;
     background-color: #b53784;
   }
+
+.modal-dialog {
+    margin-top: 150px;
+}

@@ -2,6 +2,42 @@ button.boton__reset {
     margin-right: 100px;
 }
 
+button.btn-primary {
+    background: #b53784;
+    border: 1px solid #b53784;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    height: 37.8px;
+    width: 50px;
+}
+
+button.btn-primary:focus-visible{
+    box-shadow: 0 0 0 0.25rem #e7b1d2 !important;
+}
+
+button.btn-primary:hover {
+    background: white;
+    color: #b53784;
+}
+
+select.ds__select {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+button.btn-close:focus-visible,  button.btn-close:focus{
+    box-shadow: 0 0 0 0.25rem #e7b1d2 !important;
+}
+
+.form-check-label {
+    margin-right: 10px;
+}
+
+input#traintest {
+    accent-color: #b53784 !important;
+    transform: scale(1.2);
+}
+
 button.btn-outline-primary {
     border-color: #b53784;
     color: #b53784;

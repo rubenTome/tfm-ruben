@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class GetExperimentoService {
+export class HttpService {
   constructor(private http: HttpClient) {}
 
   sendForm(params: any) {
@@ -20,5 +20,9 @@ export class GetExperimentoService {
 
   getHistory() {
     return this.http.get(`http://127.0.0.1:8000/historial`);
+  }
+
+  saveFile(file: FormData) {
+    return this.http.put(`http://127.0.0.1:8000/dataset`, file);
   }
 }

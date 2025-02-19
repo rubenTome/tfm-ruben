@@ -1,10 +1,24 @@
 import sys, os, pathlib
 from pathlib import Path
 sys.path.append(os.path.abspath(str(pathlib.Path(__file__).parent.resolve()) + "/../e2efs"))
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from script_alpha import run_experiment
+from pydantic import BaseModel
+import aiofiles
 app = FastAPI()
 import json
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:4200"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+class FileUpload(BaseModel):
+    input: str
 
 @app.get("/experiment/")
 async def expermient(dataset: str, nFeat: str, prec: str, kFolds: str, reps: str, alpha: str, wait: str, implementation: str, codecarbon: str):
@@ -35,3 +49,12 @@ async def history():
             if expFiles[j].endswith(".json"):
                 historicFiles.append(json.load(open(Path(historyPath + "/" + files[i] + "/" + expFiles[j]))))
     return historicFiles
+
+@app.put("/dataset/")
+async def dataset(file: UploadFile):
+    out_file_path = str(pathlib.Path(__file__).parent.resolve()) + str(Path("/../../tfm-backend/e2efs/datasets/" + file.filename))
+    async with aiofiles.open(out_file_path, 'wb') as out_file:
+        content = await file.read()
+        await out_file.write(content)
+
+    return {"success": file}

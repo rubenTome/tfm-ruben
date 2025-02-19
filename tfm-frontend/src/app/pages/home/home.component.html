@@ -15,11 +15,16 @@
                             <div class="row">
                                 <div class="col-12 col-lg-4 mb-4">
                                     <label for="dataset">Conjunto de datos: </label>
-                                    <select class="form-control" id="dataset" formControlName="dataset">
-                                        <option *ngFor="let dataset of datasetsOptions">
-                                            {{dataset}}
-                                        </option>
-                                    </select>
+                                    <div class=" d-flex align-items-end">
+                                        <select class="form-control ds__select" id="dataset" formControlName="dataset">
+                                            <option *ngFor="let dataset of datasetsOptions">
+                                                {{dataset}}
+                                            </option>
+                                        </select>
+                                        <button class="btn btn-md btn-primary" (click)="open(content)">
+                                            <span class="material-icons-outlined">file_upload</span>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-lg-4 mb-4">
                                     <label for="nFeatures">Número de características objetivo: </label>
@@ -95,3 +100,22 @@
         </div>
     </form>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Subir un nuevo conjunto de datos</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="mx-4 modal-body d-flex flex-column justify-content-start">
+        <div class="my-4">
+            <input type="file" class="form-control"(change)="onFileSelected($event)" #fileUpload>
+        </div>
+        <div class="p-0 my-4 form-check form-switch d-flex align-items-center justify-content-end">
+            <label class="form-check-label traintest" for="traintest">¿Separado train y test?</label>
+            <input class="d-flex" id="traintest" type="checkbox">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" (click)="saveFile()">Subir</button>
+    </div>
+</ng-template>
