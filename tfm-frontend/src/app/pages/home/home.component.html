@@ -108,7 +108,8 @@
     </div>
     <div class="mx-4 modal-body d-flex flex-column justify-content-start">
         <div class="my-4">
-            <input type="file" class="form-control"(change)="onFileSelected($event)" #fileUpload>
+            <p class="text-center fw-bold">Solo están permitidos archivos .zip</p>
+            <input type="file" accept=".zip" class="form-control mt-2"(change)="onFileSelected($event)" #fileUpload>
         </div>
         <div class="p-0 my-4 form-check form-switch d-flex align-items-center justify-content-end">
             <label class="form-check-label traintest" for="traintest">¿Separado train y test?</label>

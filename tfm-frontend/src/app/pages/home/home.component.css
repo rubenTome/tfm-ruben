@@ -60,7 +60,6 @@ span.material-icons-outlined {
 
 .div__botones {
     width: -webkit-fill-available;
-    padding-right: 50px;
-    position: absolute;
-    bottom: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }

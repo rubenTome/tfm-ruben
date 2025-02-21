@@ -46,3 +46,4 @@ tfm-backend/server/lightning_logs/
 tfm-db/history/*
 tfm-db/last_experiment/*
 tfm-backend/e2efs/*/__pycache__
+tfm-backend/e2efs/datasets/*

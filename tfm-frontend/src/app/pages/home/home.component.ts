@@ -3,7 +3,6 @@ import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbAccordionModule, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { HttpService } from '../../services/http-service.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -14,31 +13,26 @@ import { HttpClient } from '@angular/common/http';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class HomeComponent {
-  constructor(private httpService: HttpService, config: NgbModalConfig, private modalService: NgbModal, private http: HttpClient) {
+export class HomeComponent{
+  constructor(private httpService: HttpService, config: NgbModalConfig, private modalService: NgbModal) {
+    this.httpService.getDatasets().subscribe((response) => {
+      this.datasetsOptions = response.toString().split(",");
+    });
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
   datasetInfo: any;
 
-  datasetsOptions = [
-    "",
-    "Colon",
-    "Leukemia",
-    "Lung",
-    "Lymphoma",
-    "Gina",
-    "Gisette",
-    "Dexter",
-    "Madelon",
-  ]
+  datasetsOptions: string[] = [" ", "Cargando..."];
+
   precisionOptions = [
     "",
     "16-bits en punto flotante",
     "32-bits en punto flotante",
     "64-bits en punto flotante",
   ]
+
   implementationOptions = [
     "Lineal",
     "Lineal v2 (capa convolucional)"
@@ -88,8 +82,11 @@ export class HomeComponent {
   }
 
   saveFile() {
-    this.httpService.saveFile(this.datasetInfo).subscribe((response: any) => {
-      this.modalService.dismissAll();
+    this.httpService.saveFile(this.datasetInfo).subscribe(() => {
+      this.httpService.getDatasets().subscribe((response) => {
+        this.datasetsOptions = response.toString().split(",");
+        this.modalService.dismissAll();
+      });
     });
   }
 }

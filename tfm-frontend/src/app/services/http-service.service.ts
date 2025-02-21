@@ -22,6 +22,10 @@ export class HttpService {
     return this.http.get(`http://127.0.0.1:8000/historial`);
   }
 
+  getDatasets() {
+    return this.http.get(`http://127.0.0.1:8000/datasets_list`);
+  }
+
   saveFile(file: FormData) {
     return this.http.put(`http://127.0.0.1:8000/dataset`, file);
   }

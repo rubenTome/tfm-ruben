@@ -1,4 +1,4 @@
-from dataset_reader import colon, leukemia, lung181, lymphoma, dexter, gina, gisette, madelon
+from dataset_reader import colon, leukemia, lung181, lymphoma, dexter, gina, gisette, madelon, generic_reader
 import numpy as np
 import e2efs
 import pandas as pd
@@ -70,6 +70,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         kfold = RepeatedStratifiedKFold(n_splits=k_folds, n_repeats=N, random_state=42)
         
         #select dataset
+        isGeneric = False
         if ds == "colon":
             selectedDs = colon
             print("selected colon dataset")
@@ -94,6 +95,14 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         elif ds == "madelon":
             selectedDs = madelon
             print("selected madelon dataset")
+        else:
+            if ds in os.listdir(Path("../e2efs/datasets")):
+                selectedDs = generic_reader
+                print("selected " + ds + " dataset")
+                isGeneric = True
+            else:
+                print("Error: unknown dataset")
+                return
 
         if net == None:
             netStr = ""
@@ -116,7 +125,10 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         f = open(Path(directory + "/stats/" + name + ".txt"), "w")
 
         ## LOAD DATA
-        dataset = selectedDs.load_dataset()
+        if isGeneric:
+            dataset = selectedDs.load_dataset(ds)
+        else:
+            dataset = selectedDs.load_dataset()
         raw_data = np.asarray(dataset['raw']['data'])
         raw_label = np.asarray(dataset['raw']['label']).reshape(-1)
         normalize = selectedDs.Normalize()

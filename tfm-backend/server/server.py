@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from script_alpha import run_experiment
 from pydantic import BaseModel
 import aiofiles
+import zipfile
 app = FastAPI()
 import json
 
@@ -50,11 +51,24 @@ async def history():
                 historicFiles.append(json.load(open(Path(historyPath + "/" + files[i] + "/" + expFiles[j]))))
     return historicFiles
 
+@app.get("/datasets_list/")
+async def get_datasets_list():
+    datasetsPath = str(pathlib.Path(__file__).parent.resolve()) + "/../../tfm-backend/e2efs/datasets"
+    datasets = [" "]
+    datasets += os.listdir(Path(datasetsPath))
+    return datasets
+
+# PARA SUBIR ARCHIVOS, SOLO .ZIP QUE CONTENGA COMPRIMIDOS .DATA Y .LABELS, COMO LOS DATASETS DE FEATURE SELECTION CHALLENGE
 @app.put("/dataset/")
 async def dataset(file: UploadFile):
     out_file_path = str(pathlib.Path(__file__).parent.resolve()) + str(Path("/../../tfm-backend/e2efs/datasets/" + file.filename))
     async with aiofiles.open(out_file_path, 'wb') as out_file:
         content = await file.read()
         await out_file.write(content)
+    
+    with zipfile.ZipFile(out_file_path, 'r') as zip_ref:
+        zip_ref.extractall(out_file_path.replace(".zip", ""))
+    
+    os.remove(out_file_path)
 
     return {"success": file}
