@@ -15,6 +15,7 @@ export class BarPlotComponent implements OnInit{
   n_feat = input<number>();
 
   ngOnInit(): void {
+    console.log(this.detalle())
     this.maxFeat = this.n_feat()
   } 
 }

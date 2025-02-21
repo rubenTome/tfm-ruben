@@ -21,7 +21,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
     exec_info = {}
     try:
         startTime = int(time.time())
-        rankingMean = np.array([])
+        maskMean = np.array([])
         #conversions from string to int
         n_features_to_select = int(n_features_to_select)
         k_folds = int(k_folds)
@@ -200,10 +200,10 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             print('MASK:', mask)
             ## GET THE RANKING
             ranking = model.get_ranking()
-            if len(rankingMean) == 0:
-                rankingMean = np.array(ranking)
+            if len(maskMean) == 0:
+                maskMean = np.array(mask)
             else:
-                rankingMean += np.array(ranking)
+                maskMean += np.array(mask)
             print('RANKING:', ranking)
             nf = model.get_nfeats()
             print("NUMBER OF FEATURES:", nf)
@@ -228,11 +228,11 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         historyDir = "../../tfm-db/history/experiment_" + str(startTime)
         shutil.copytree(Path(results_dir), Path(historyDir))
         #WRITE RESULTS TO A JSON FILE TO HISTORIC
-        rankingMean = rankingMean / (N * k_folds)
-        rankingMean = rankingMean.tolist()
-        rankingMean = [float(e)/sum(rankingMean) for e in rankingMean]
-        indexedRankingMean = [[k, rankingMean[k]] for k in range(len(rankingMean))]
-        indexedRankingMean.sort(key=custom_sort)
+        maskMean = maskMean / (N * k_folds)
+        maskMean = maskMean.tolist()
+        maskMean = [float(e)/sum(maskMean) for e in maskMean]
+        indexedmaskMean = [[k, maskMean[k]] for k in range(len(maskMean))]
+        indexedmaskMean.sort(key=custom_sort)
         results_dict = {
             "dataset": ds,
             "n_features_to_select": n_features_to_select,
@@ -248,7 +248,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
 
             "results": df.to_dict(),
 
-            "ranking": indexedRankingMean
+            "ranking": indexedmaskMean
         }
         results_json = json.dumps(results_dict)
         results_json_file = open(Path(historyDir + "/results_" + str(startTime) + ".json"), "w")
