@@ -1,0 +1,53 @@
+<!-- modificar backend, para que devuelva emisiones -->
+<div>
+    <div class="titulo__emissions__plot text-center">
+        Huella de carbono del experimento
+    </div>
+    <div class="row d-flex justify-content-around mx-5">
+        <div class="col-12 col-lg-3 card d-flex align-items-center my-5 pt-2">
+            <img class="card-img-top w-25" src="img/time.png" alt="time image">
+            <div class="card-body">
+                <h5 class="card-title text-center">Tiempo de ejecución</h5>
+                <p class="card-text text-center">{{number(duracion())}} seg</p>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 card d-flex align-items-center my-5">
+            <img class="card-img-top w-25" src="img/co2.png" alt="co2 image">
+            <div class="card-body">
+                <h5 class="card-title text-center">Emisiones de carbono</h5>
+                <p class="card-text text-center">{{emisiones() * 1000}} gCO2e</p>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 card d-flex align-items-center my-5 pt-2">
+            <img class="card-img-top w-25" src="img/electricidad.png" alt="electricity image">
+            <div class="card-body">
+                <h5 class="card-title text-center">Consumo de energía</h5>
+                <p class="card-text text-center">{{energia()}} Wh</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-around mx-5">
+        <div class="col-12 col-lg-3 card d-flex align-items-center my-5">
+            <img class="card-img-top w-25" src="img/car.jpg" alt="car image">
+            <div class="card-body">
+                <h5 class="card-title text-center">En coche sería un viaje de</h5>
+                <p class="card-text text-center">{{number((emisiones() * 1000) / 148)}} Km</p>
+            </div>
+        </div>
+        <!-- <div class="col-12 col-lg-3 card d-flex align-items-center my-5 pt-2">
+            <img class="card-img-top w-25" src="img/" alt="XX image">
+            <div class="card-body">
+                <h5 class="card-title text-center">XX</h5>
+                <p class="card-text text-center">XX</p>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 card d-flex align-items-center my-5 pt-2">
+            <img class="card-img-top w-25" src="img/" alt="XX image">
+            <div class="card-body">
+                <h5 class="card-title text-center">XX</h5>
+                <p class="card-text text-center">XX</p>
+            </div>
+        </div> -->
+    </div>
+</div>

@@ -4,18 +4,21 @@
     </div>
     <div class="d-flex align-items-center m-5 mb-0">
         <label for="nFeat">Número de características: </label>
-        <input class="form-control input__nFeat" id="nFeat" type="number" min="1" max={{n_feat()}} [(ngModel)]="maxFeat">
+        <input class="form-control input__nFeat" id="nFeat" type="number" min="1" max={{n_feat()}}
+            [(ngModel)]="maxFeat">
     </div>
-    <div class="d-flex align-items-center justify-content-start">
-        <span class="y__label">Importancia</span>
+
+    <span class="x__label">Importancia</span>
+    <div class="d-flex">
+        <span class="y__label">
+            Característica
+        </span>
         <div class="barplot__env">
             <ng-container *ngFor="let index of detalle(); track item; index as i">
-                <span class="bar__elem" *ngIf="i < maxFeat"
-                    [ngStyle]="{'height': ((index[1] * 200000000) - 282900) + 'px'}">{{index[0]}}</span>
+                <span class="bar__elem" *ngIf="i < maxFeat && ((index[1] * 200000000) - 282900) > 60"
+                    [ngStyle]="{'width': ((index[1] * 200000000) - 282900) + 'px'}">{{index[0]}}</span>
             </ng-container>
         </div>
     </div>
-    <span class="x__label">
-        Característica
-    </span>
+
 </div>

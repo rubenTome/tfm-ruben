@@ -47,6 +47,9 @@
             </div>
         </div>
         @if(detalle !== null) {
+        @if (detalle["codecarbon_tracking"]) {
+        <app-emissions-plot [duracion]="detalle['results']['duration']['1']" [emisiones]="detalle['results']['emissions']['1']" [energia]="5"></app-emissions-plot>
+        }
         <app-bar-plot [detalle]="detalle['ranking']" [n_feat]="detalle['n_features_to_select']"></app-bar-plot>
         }
     </div>

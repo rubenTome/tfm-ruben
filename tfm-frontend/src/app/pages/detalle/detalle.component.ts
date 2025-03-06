@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../services/http-service.service';
 import { BarPlotComponent } from "./bar-plot/bar-plot.component";
 import { NgbScrollSpyModule } from '@ng-bootstrap/ng-bootstrap';
+import { EmissionsPlotComponent } from "./emissions-plot/emissions-plot.component";
 
 @Component({
   selector: 'app-detalle',
-  imports: [BarPlotComponent, NgbScrollSpyModule],
+  imports: [BarPlotComponent, NgbScrollSpyModule, EmissionsPlotComponent],
   templateUrl: './detalle.component.html',
   styleUrl: './detalle.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -32,26 +32,31 @@
 .barplot__env {
   width: -webkit-fill-available;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-evenly;
   margin-top: 50px;
-  margin-right: 50px;
+  margin-right: 130px;
   border-left: 3px solid #752456;
-  border-bottom: 3px solid #752456;
-  overflow: auto;
+  border-top: 3px solid #752456;
+  height: fit-content;
+  margin-bottom: 120px;
+  padding-bottom: 15px;
 }
 
 .bar__elem {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   color: white;
   font-weight: 700;
-  width: 50px;
+  min-width: 60px;
   background: #b53784;
   border: 2px solid #752456;
-  border-top-left-radius:5px;
+  border-bottom-right-radius:5px;
   border-top-right-radius:5px;
-  border-bottom: 0px;
+  border-top: 0px;
+  border-left: 0px;
+  padding-left: 10px;
 }
 
 .input__nFeat {
@@ -65,16 +70,18 @@
   color: #752456;
   font-size: 25px;
   font-weight: 700;
-  margin-top: 30px;
-  height: 150px;
+  margin-top: 50px;
+  height: 25px;
 }
 
 .y__label {
   display: flex;
-  justify-content: center;
+  align-items: center;
   color: #752456;
   font-size: 25px;
   font-weight: 700;
+  height: fit-content;
+  margin-top: 130px;
 
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);

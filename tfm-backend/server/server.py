@@ -4,7 +4,6 @@ sys.path.append(os.path.abspath(str(pathlib.Path(__file__).parent.resolve()) + "
 from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from script_alpha import run_experiment
-from pydantic import BaseModel
 import aiofiles
 import zipfile
 app = FastAPI()
@@ -17,9 +16,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-class FileUpload(BaseModel):
-    input: str
 
 @app.get("/experiment/")
 async def expermient(dataset: str, nFeat: str, prec: str, kFolds: str, reps: str, alpha: str, wait: str, implementation: str, codecarbon: str):
