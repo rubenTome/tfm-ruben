@@ -21,6 +21,6 @@ export class EmissionsPlotComponent implements OnInit {
   energia = input<any>();
 
   ngOnInit(): void {
-      console.log(this.emisiones())
+      console.log(this.energia())
   }
  }

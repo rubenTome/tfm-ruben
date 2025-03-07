@@ -116,7 +116,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         os.mkdir(Path(results_dir + "/results_" + ds + netStr + "/fp" + precision + "/stats"))
         
         #set up directory names and csv columns
-        df = pd.DataFrame(columns=["test_acc", "balanced_acc", "nfeat", "max_alpha", "emissions", "duration"])
+        df = pd.DataFrame(columns=["test_acc", "balanced_acc", "nfeat", "max_alpha", "emissions", "energy", "duration"])
         if net == "conv":
             directory = results_dir + "/results_" + ds + "_conv/fp" + precision
         else:
@@ -182,10 +182,12 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
                 tracker.stop()
                 csvf = pd.read_csv("emissions.csv")
                 emissions = csvf["emissions"].values[0]
+                energy = csvf["energy_consumed"].values[0]
                 duration = csvf["duration"].values[0]
                 os.remove("emissions.csv")
             else:
                 emissions = -1
+                energy = -1
                 duration = time.time() - tracker
             
             ## GET THE MODEL RESULTS
@@ -209,7 +211,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             print("NUMBER OF FEATURES:", nf)
             print("ALPHA MAX:", fi)
             if j > 0:
-                df.loc[j] = [round(metrics["test_accuracy"], 4), round(balanced_acc, 4), nf, fi, emissions, duration]
+                df.loc[j] = [round(metrics["test_accuracy"], 4), round(balanced_acc, 4), nf, fi, emissions, energy, duration]
                 df.to_csv(Path(directory + "/csv/" + name + ".csv"), index=False)
             exec_info.update({"progress": int(j / max_progress * 100)})
             json_exec_info = json.dumps(exec_info)

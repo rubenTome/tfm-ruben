@@ -15,8 +15,8 @@
         </span>
         <div class="barplot__env">
             <ng-container *ngFor="let index of detalle(); track item; index as i">
-                <span class="bar__elem" *ngIf="i < maxFeat && ((index[1] * 200000000) - 282900) > 60"
-                    [ngStyle]="{'width': ((index[1] * 200000000) - 282900) + 'px'}">{{index[0]}}</span>
+                <span class="bar__elem" *ngIf="i < maxFeat"
+                    [ngStyle]="{'width': ((index[1] * 1000) + 30) + 'vw'}">{{index[0]}}</span>
             </ng-container>
         </div>
     </div>
