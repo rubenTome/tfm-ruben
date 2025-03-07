@@ -14,14 +14,14 @@
             <img class="card-img-top w-25" src="img/co2.png" alt="co2 image">
             <div class="card-body">
                 <h5 class="card-title text-center">Emisiones de carbono</h5>
-                <p class="card-text text-center">{{emisiones() * 1000}} gCO2e</p>
+                <p class="card-text text-center">{{number(emisiones() * 1000, "1.2-6")}} gCO2e</p>
             </div>
         </div>
         <div class="col-12 col-lg-3 card d-flex align-items-center my-5 pt-2">
             <img class="card-img-top w-25" src="img/electricidad.png" alt="electricity image">
             <div class="card-body">
                 <h5 class="card-title text-center">Consumo de energía</h5>
-                <p class="card-text text-center">{{energia()}} Wh</p>
+                <p class="card-text text-center">{{number(energia() * 1000, "1.2-6")}} Wh</p>
             </div>
         </div>
     </div>

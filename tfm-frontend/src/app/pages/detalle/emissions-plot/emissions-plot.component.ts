@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import {DecimalPipe} from "@angular/common"
 
 @Component({
@@ -9,18 +9,14 @@ import {DecimalPipe} from "@angular/common"
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DecimalPipe]
 })
-export class EmissionsPlotComponent implements OnInit {
+export class EmissionsPlotComponent {
   constructor(private _decimalPipe: DecimalPipe) {}
 
-    number(num: any) {
-      return this._decimalPipe.transform(num, '1.2-2');
+    number(num: any, format: string = '1.2-2') {
+      return this._decimalPipe.transform(num, format);
     }
 
   duracion = input<any>();
   emisiones = input<any>();
   energia = input<any>();
-
-  ngOnInit(): void {
-      console.log(this.energia())
-  }
  }
