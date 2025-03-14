@@ -7,11 +7,7 @@ import os
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.metrics import balanced_accuracy_score
 import time
-import shutil
-import json
 from pathlib import Path
-
-results_dir = "../../tfm-db/last_experiment/results"
 
 def custom_sort(e):
     return - e[1]
@@ -35,10 +31,6 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
         net = "conv"
         if network == "lineal":
             net = None
-
-        if os.path.exists(Path(results_dir)):
-            shutil.rmtree(Path(results_dir))
-        os.mkdir(Path(results_dir))
 
         #GET EXEC INFO FROM FIREBASE AND UPDATE IT
         status_obj = {
@@ -100,25 +92,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
                 print("Error: unknown dataset")
                 return
 
-        if net == None:
-            netStr = ""
-        else:
-            netStr = "_" + net
-
-        if not os.path.exists(Path(results_dir + "/results_" + ds + netStr)):
-            os.mkdir(Path(results_dir + "/results_" + ds + netStr))
-        os.mkdir(Path(results_dir + "/results_" + ds + netStr + "/fp" + precision))
-        os.mkdir(Path(results_dir + "/results_" + ds + netStr + "/fp" + precision + "/csv"))
-        os.mkdir(Path(results_dir + "/results_" + ds + netStr + "/fp" + precision + "/stats"))
-        
-        #set up directory names and csv columns
         df = pd.DataFrame(columns=["test_acc", "balanced_acc", "nfeat", "max_alpha", "emissions", "energy", "duration"])
-        if net == "conv":
-            directory = results_dir + "/results_" + ds + "_conv/fp" + precision
-        else:
-            directory = results_dir + "/results_" + ds + "/fp" + precision
-        name = ds + "_a" + str(round(fi, 4)) + "_fp" + precision
-        f = open(Path(directory + "/stats/" + name + ".txt"), "w")
 
         ## LOAD DATA
         if isGeneric:
@@ -208,18 +182,14 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             print("ALPHA MAX:", fi)
             if j > 0:
                 df.loc[j] = [round(metrics["test_accuracy"], 4), round(balanced_acc, 4), nf, fi, emissions, energy, duration]
-                df.to_csv(Path(directory + "/csv/" + name + ".csv"), index=False)
             #upate progress bar
             status_obj["progress"] = int(j / max_progress * 100)
             ref.child("exec_info").update(status_obj)
             
         #write stats and global emissions
-        f.write(df.describe().to_string())
         status_obj["status"] = "finalizado"
         status_obj["progress"] = 100
         ref.child("exec_info").update(status_obj)
-        historyDir = "../../tfm-db/history/experiment_" + str(startTime)
-        shutil.copytree(Path(results_dir), Path(historyDir))
         #WRITE RESULTS TO A JSON FILE TO HISTORIC
         maskMean = maskMean / (N * k_folds)
         maskMean = maskMean.tolist()
@@ -243,10 +213,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
 
             "ranking": indexedmaskMean
         }
-        results_json = json.dumps(results_dict)
-        results_json_file = open(Path(historyDir + "/results_" + str(startTime) + ".json"), "w")
-        results_json_file.write(results_json)
-        results_json_file.close()
+        ref.child("history").child(str(startTime)).set(results_dict)
 
     except  Exception as e:
         print(e)
