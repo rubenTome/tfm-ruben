@@ -8,6 +8,12 @@ import aiofiles
 import zipfile
 app = FastAPI()
 import json
+import firebase_admin
+from firebase_admin import db
+
+cred = firebase_admin.credentials.Certificate(Path("../../tfm-db/api_key/private_key.json"))
+firebase_admin.initialize_app(cred, {'databaseURL': "https://tfm-bd-3e179-default-rtdb.europe-west1.firebasedatabase.app/"})
+ref = db.reference("/")
 
 app.add_middleware(
     CORSMiddleware,
@@ -18,8 +24,8 @@ app.add_middleware(
 )
 
 @app.get("/experiment/")
-async def expermient(dataset: str, nFeat: str, prec: str, kFolds: str, reps: str, alpha: str, wait: str, implementation: str, codecarbon: str):
-    run_experiment(dataset, nFeat, prec, kFolds, reps, alpha, wait, implementation, codecarbon)
+def expermient(dataset: str, nFeat: str, prec: str, kFolds: str, reps: str, alpha: str, wait: str, implementation: str, codecarbon: str):
+    run_experiment(dataset, nFeat, prec, kFolds, reps, alpha, wait, implementation, codecarbon, ref)
     return {"success": [dataset, nFeat, prec, kFolds, reps, alpha, wait, implementation, codecarbon]}
 
 @app.get("/detalle/")
@@ -53,6 +59,11 @@ async def get_datasets_list():
     datasets = [" "]
     datasets += os.listdir(Path(datasetsPath))
     return datasets
+
+@app.get("/exec_info")
+async def get_exec_info():
+    return ref.child("exec_info").get()
+
 
 # PARA SUBIR ARCHIVOS, SOLO .ZIP QUE CONTENGA COMPRIMIDOS .DATA Y .LABELS, COMO LOS DATASETS DE FEATURE SELECTION CHALLENGE
 @app.put("/dataset/")

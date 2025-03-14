@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
-import * as exec_info from "../../../../../tfm-db/exec_info.json"
+import { ExecInfoServiceService } from '../../services/exec_info-service.service';
 
 
 @Component({
@@ -10,9 +10,36 @@ import * as exec_info from "../../../../../tfm-db/exec_info.json"
   styleUrl: './ejecucion.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EjecucionComponent {
+export class EjecucionComponent implements OnInit, OnDestroy {
+  
+  exec_info: any;
+  timer: any;
+  mostrarTodo: boolean = false;
 
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef, private ExecInfoServiceService: ExecInfoServiceService) { 
+    this.ExecInfoServiceService.getExecInfo().subscribe((response: any) => {
+      this.exec_info = response
+    });
+  }
+
+  ngOnInit() {
+    this.iniciarTimer();
+  }
+
+  ngOnDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+  }
+
+  iniciarTimer() {
+    this.timer = setInterval(() => {
+      this.ExecInfoServiceService.getExecInfo().subscribe((response: any) => {
+        this.exec_info = response
+        this.cdr.detectChanges();
+      });
+    }, 10000);
+  }
 
   estadosPosibles: string[] = [
     "error",
@@ -20,22 +47,6 @@ export class EjecucionComponent {
     "finalizado",
     "inicial"
   ]
-
-  progreso: number = exec_info.progress;
-  status: string = exec_info.status;
-  mostrarTodo: boolean = false;
-
-  dataset: string = exec_info.ds.toString();
-  nFeatures: string = exec_info.n_features_to_select.toString();
-  precision: string = exec_info.precision.toString().slice(0, 2) + "-bits coma flotante";
-  kFolds: string = exec_info.k_folds.toString();
-  reps: string = exec_info.N.toString();
-  alpha: string = exec_info.fi.toString();
-  wait: string = exec_info.wait.toString();
-  implementation: string = exec_info.net;
-  codecarbon: boolean = exec_info.codecarbon_tracking;
-  errorMensaje: string = exec_info.errorMessage.toString()
-
 
   toggleMostrarTodo() {
     this.mostrarTodo = !this.mostrarTodo;
@@ -46,7 +57,7 @@ export class EjecucionComponent {
   }
 
   verUltimoExp() {
-    window.location.href = "/experimentos/" + exec_info.id;
+    window.location.href = "/experimentos/" + this.exec_info.id;
   }
 
 }

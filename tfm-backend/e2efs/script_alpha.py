@@ -4,7 +4,6 @@ import e2efs
 import pandas as pd
 from codecarbon import EmissionsTracker
 import os
-import sys
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.metrics import balanced_accuracy_score
 import time
@@ -17,8 +16,7 @@ results_dir = "../../tfm-db/last_experiment/results"
 def custom_sort(e):
     return - e[1]
 
-def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, network, codecarbon_tracking):
-    exec_info = {}
+def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, network, codecarbon_tracking, ref):
     try:
         startTime = int(time.time())
         maskMean = np.array([])
@@ -42,8 +40,8 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             shutil.rmtree(Path(results_dir))
         os.mkdir(Path(results_dir))
 
-        #CREATE DICTIONARY WITH EXECUTION INFO, AND WRITING TO A JSON FILE
-        exec_info = {
+        #GET EXEC INFO FROM FIREBASE AND UPDATE IT
+        status_obj = {
             "ds": ds,
             "n_features_to_select": n_features_to_select,
             "precision": precision,
@@ -59,12 +57,10 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             "progress": 0,
             "id": startTime
         }
+        ref.child("exec_info").update(status_obj)
+
         
         max_progress = k_folds * N
-        json_exec_info = json.dumps(exec_info)
-        json_file = open(Path(results_dir + "/../../exec_info.json"), "w")
-        json_file.write(json_exec_info)
-        json_file.close()
         
         print("Precision:", precision)
         kfold = RepeatedStratifiedKFold(n_splits=k_folds, n_repeats=N, random_state=42)
@@ -213,20 +209,15 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             if j > 0:
                 df.loc[j] = [round(metrics["test_accuracy"], 4), round(balanced_acc, 4), nf, fi, emissions, energy, duration]
                 df.to_csv(Path(directory + "/csv/" + name + ".csv"), index=False)
-            exec_info.update({"progress": int(j / max_progress * 100)})
-            json_exec_info = json.dumps(exec_info)
-            json_file = open(Path(results_dir + "/../../exec_info.json"), "w")
-            json_file.write(json_exec_info)
-            json_file.close()
+            #upate progress bar
+            status_obj["progress"] = int(j / max_progress * 100)
+            ref.child("exec_info").update(status_obj)
             
         #write stats and global emissions
         f.write(df.describe().to_string())
-        exec_info.update({"status": "finalizado"})
-        exec_info.update({"progress": 100})
-        json_exec_info = json.dumps(exec_info)
-        json_file = open(Path(results_dir + "/../../exec_info.json"), "w")
-        json_file.write(json_exec_info)
-        json_file.close()
+        status_obj["status"] = "finalizado"
+        status_obj["progress"] = 100
+        ref.child("exec_info").update(status_obj)
         historyDir = "../../tfm-db/history/experiment_" + str(startTime)
         shutil.copytree(Path(results_dir), Path(historyDir))
         #WRITE RESULTS TO A JSON FILE TO HISTORIC
@@ -259,10 +250,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
 
     except  Exception as e:
         print(e)
-        exec_info.update({"status": "error"})
-        exec_info.update({"errorMessage": str(e)})
-        json_exec_info = json.dumps(exec_info)
-        json_file = open(Path(results_dir + "/../../exec_info.json"), "w")
-        json_file.write(json_exec_info)
-        json_file.close()
+        status_obj["status"] = "error"
+        status_obj["errorMessage"] = str(e)
+        ref.child("exec_info").update(status_obj)
         return 
