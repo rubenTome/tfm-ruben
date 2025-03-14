@@ -7,11 +7,10 @@ from script_alpha import run_experiment
 import aiofiles
 import zipfile
 app = FastAPI()
-import json
 import firebase_admin
 from firebase_admin import db
 
-cred = firebase_admin.credentials.Certificate(Path("../../tfm-db/api_key/private_key.json"))
+cred = firebase_admin.credentials.Certificate(Path("../../tfm-db/private_key.json"))
 firebase_admin.initialize_app(cred, {'databaseURL': "https://tfm-bd-3e179-default-rtdb.europe-west1.firebasedatabase.app/"})
 ref = db.reference("/")
 

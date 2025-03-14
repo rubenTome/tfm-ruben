@@ -47,4 +47,4 @@ tfm-db/history/*
 tfm-db/last_experiment/*
 tfm-backend/e2efs/*/__pycache__
 tfm-backend/e2efs/datasets/*
-tfm-db/api_key/*
+tfm-db/*
