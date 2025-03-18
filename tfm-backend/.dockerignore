@@ -1,0 +1,5 @@
+server/lightning_logs
+server/__pycache__
+
+e2efs/__pycache__
+e2efs/requirements.txt
