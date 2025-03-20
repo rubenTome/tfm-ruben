@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    networks:
+      - net
 
   frontend:
     build:
@@ -13,5 +15,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - "4200:4200"
+    networks:
+      - net
     depends_on:
       - backend
+  
+networks:
+  net:
+    driver: bridge
