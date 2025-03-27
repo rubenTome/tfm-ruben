@@ -30,8 +30,8 @@
                     </div>
                 </div>
                 <div class="col-12 text-center mt-5">
-                    <button class="btn btn-lg btn-outline-primary mr-4 boton__reset" (click)="reintentar()">
-                        <span class="material-icons-outlined">replay</span>
+                    <button class="btn btn-lg btn-outline-primary mr-4 boton__reset" (click)="volver()">
+                        <span class="material-icons-outlined">keyboard_return</span>
                     </button>
                 </div>
             }
@@ -78,7 +78,7 @@
                                 <span class="valores__exp">{{exec_info.net}}</span>
                             </div>
                             <div class="col-12 d-flex justify-content-between py-2">
-                                <h5 class="m-0">¿Se ha usado exec_info.codecarbon_tracking?: </h5>
+                                <h5 class="m-0">¿Se ha usado codecarbon?: </h5>
                                 @if(exec_info.codecarbon_tracking) {
                                     <span class="valores__exp">Sí</span>
                                 }

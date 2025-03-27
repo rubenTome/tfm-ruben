@@ -2,7 +2,7 @@
     <div class="titulo__barplot text-center">
         Top {{maxFeat}} Características más relevantes
     </div>
-    <div class="d-flex align-items-center m-5 mb-0">
+    <div class="selector__caract__env m-5 mb-0">
         <label for="nFeat">Número de características: </label>
         <input class="form-control input__nFeat" id="nFeat" type="number" min="1" max={{n_feat()}}
             [(ngModel)]="maxFeat">

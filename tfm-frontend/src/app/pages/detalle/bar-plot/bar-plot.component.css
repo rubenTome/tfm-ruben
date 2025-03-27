@@ -89,3 +89,27 @@
   -ms-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
+
+.selector__caract__env {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 992px) {
+  .titulo__barplot {
+    font-size: 20px;
+  }
+  .x__label, .y__label {
+    font-size: 18px;
+  }
+  .bar__elem {
+    font-size: 14px;
+  }
+  .selector__caract__env {
+    flex-direction: column;
+  }
+  .input__nFeat {
+    margin-left: 0px;
+    margin-top: 10px;
+  }
+}

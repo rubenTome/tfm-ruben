@@ -62,6 +62,18 @@ span.material-icons-outlined {
     width: -webkit-fill-available;
     padding-top: 50px;
     padding-bottom: 50px;
+    display: flex;
+    justify-content: end;
+}
+
+@media screen and (max-width: 992px) {
+    .btn {
+        font-size: 18px;
+        padding: 5px;
+    }
+    .div__botones {
+        justify-content: center;
+    }
 }
 
 .link__manual {

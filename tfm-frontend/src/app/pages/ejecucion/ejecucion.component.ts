@@ -52,8 +52,8 @@ export class EjecucionComponent implements OnInit, OnDestroy {
     this.mostrarTodo = !this.mostrarTodo;
   }
 
-  reintentar() {
-    console.log("Reintentar");
+  volver() {
+    window.location.href = "/home"
   }
 
   verUltimoExp() {
