@@ -48,16 +48,21 @@
                             <h5 class="m-0">Conjunto de datos: </h5>
                             <span class="valores__exp">{{exec_info.ds.toString()}}</span>
                         </div>
-                        <div class="col-12 py-2 d-flex justify-content-between">
+                        <div class="col-12 py-2 d-flex justify-content-between fondo__color">
                             <h5 class="m-0">Número de características objetivo: </h5>
                             <span class="valores__exp">{{exec_info.n_features_to_select.toString()}}</span>
                         </div>
-                        <div class="col-12 py-2 d-flex justify-content-between">
-                            <h5 class="m-0">Precisión numérica del algoritmo: </h5>
-                            <span class="valores__exp">{{exec_info.precision.toString().slice(0, 2) + "-bits coma flotante"}}</span>
+                        <div class="col-12 d-flex justify-content-between py-2">
+                            <h5 class="m-0">Se han medido emisiones: </h5>
+                            @if(exec_info.codecarbon_tracking) {
+                                <span class="valores__exp">Sí</span>
+                            }
+                            @else {
+                                <span class="valores__exp">No</span>
+                            }
                         </div>
                         @if (mostrarTodo) {
-                            <div class="col-12 py-2 d-flex justify-content-between">
+                            <div class="col-12 py-2 d-flex justify-content-between fondo__color">
                                 <h5 class="m-0">Número de folds: </h5>
                                 <span class="valores__exp">{{exec_info.k_folds.toString()}}</span>
                             </div>
@@ -65,26 +70,21 @@
                                 <h5 class="m-0">Número de repeticiones por fold: </h5>
                                 <span class="valores__exp">{{exec_info.N.toString()}}</span>
                             </div>
+                            <div class="col-12 py-2 d-flex justify-content-between fondo__color">
+                                <h5 class="m-0">Precisión numérica del algoritmo: </h5>
+                                <span class="valores__exp">{{exec_info.precision.toString().slice(0, 2) + "-bits coma flotante"}}</span>
+                            </div>
                             <div class="col-12 py-2 d-flex justify-content-between">
                                 <h5 class="m-0">Valor de alfa: </h5>
                                 <span class="valores__exp">{{exec_info.fi.toString()}}</span>
                             </div>
-                            <div class="col-12 py-2 d-flex justify-content-between">
-                                <h5 class="m-0">Número de ciclos máximos sin mejora: </h5>
-                                <span class="valores__exp">{{exec_info.wait.toString()}}</span>
-                            </div>
-                            <div class="col-12 py-2 d-flex justify-content-between">
+                            <div class="col-12 py-2 d-flex justify-content-between fondo__color">
                                 <h5 class="m-0">Implementación del clasificador: </h5>
                                 <span class="valores__exp">{{exec_info.net}}</span>
                             </div>
-                            <div class="col-12 d-flex justify-content-between py-2">
-                                <h5 class="m-0">¿Se ha usado codecarbon?: </h5>
-                                @if(exec_info.codecarbon_tracking) {
-                                    <span class="valores__exp">Sí</span>
-                                }
-                                @else {
-                                    <span class="valores__exp">No</span>
-                                }
+                            <div class="col-12 py-2 d-flex justify-content-between">
+                                <h5 class="m-0">Número de ciclos máximos sin mejora: </h5>
+                                <span class="valores__exp">{{exec_info.wait.toString()}}</span>
                             </div>
                         }
                         @if (exec_info.status == estadosPosibles[2]) {

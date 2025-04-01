@@ -1,1 +1,81 @@
-<p>manual works!</p>,
+<div class="manual__env">
+    <h1 class="mx-5 mb-5">Manual de usuario</h1>
+
+    <h3>1. Formato de los conjuntos de datos subidos</h3>
+    <p>Al subir un conjunto de datos debe respetarse un formato, para que así la información pueda ser procesable por el
+        selector de características. El formato concreto de los archivos, que deben subirse comprimidos en formato zip,
+        es el siguiente:</p>
+    <ul>
+        <li>dataname_train.data: valores del conjunto de entrenamiento. Es una matriz dispersa en la que las columnas
+            son las características y las filas cada uno de los patrones. Cada valor se representa como el número de la
+            característica seguido de su valor, separados por ":".</li>
+        <li>dataname_train.labels: etiquetas de los patrones de entrenamiento. Cada línea del fichero es una etiqueta,
+            cuyo valor oscila entre 1 y -1.</li>
+        <li>dataname_valid.data: valores del conjunto de validación.</li>
+        <li>dataname_valid.labels: etiquetas del conjunto de validación.</li>
+    </ul>
+    <p>Es importante destacar que, tal como se deduce de lo anterior, sólo se aceptarán problemas de clasificación
+        binaria como entrada del selector de características. Finalmente, si se desea subir un conjunto de datos que no
+        esté separado en entrenamiento y validación, el formato sera el mismo, siendo necesarios tan solo los archivos
+        dataname.data (patrones) y dataname.labels (etiquetas) y desactivándose los campos relacionados con la
+        configuración de la validación cruzada</p>
+
+    <h3>2. Configuraciones del selector de características</h3>
+    <p>El selector de características cuenta con una serie de parámetros que pueden ser configurados por el usuario para
+        adaptar el proceso de selección a sus necesidades. A continuación, se detallan los parámetros que pueden ser
+        configurados:</p>
+    <ul>
+        <li>Precisión numérica del algoritmo: permite seleccionar la representación numérica utilizada por el selector
+            de características para realizar los cálculos. El objetivo de este parámetro es observar como, reduciendo el
+            tamaño de la representación numérica, puede optimizarse el algoritmo y reducir así su huella de carbono. Las
+            opciones son números en coma flotante de 16, 32 o 64 bits de tamaño.
+        </li>
+        <li>Valor de alfa: este hiperparámetro controla el peso, dentro del cálculo del gradiente, del número de
+            características obtenidas respecto a la precisión de clasificación. Mayores valores de alfa priorizarán
+            eliminar características, mientras que valores bajos obtendrán mejores métricas de precisión .</li>
+        <li>Implementación: se permite seleccionar la red neuronal usada por el método para el proceso de selección de
+            características. Puede optarse por el modelo lineal, originialmente usado por el método y basada en
+            operaciones de multiplicación matricial, o la nueva red, que funciona de manera similar a la implementación
+            lineal, pero usa internamente operaciones de convolución. El objetivo de este parámetro es observar la
+            eficiencia de ambas operaciones.</li>
+        <li>Número de ciclos máximos de mejora: si el número de características deseado por el usuario es demasiado
+            bajo, puede darse el caso de que el selector de características se estanque, siendo incapaz de reducir las
+            características relevantes a ese valor. Para evitar esto, se establece este parámetro, que controla el
+            número de ciclos máximos en el que el algoritmo no consigue eliminar ninguna característica. En caso de
+            alcanzar el valor máximo fijado, el método para el proceso de selección y devuelve las características que
+            ha seleccionado hasta el momento.</li>
+    </ul>
+    <h3>3. Ejecución de forma local</h3>
+    <p>Para ejecutar localmente la aplicación, primero debe descargarse el código via <a
+            href="https://github.com/rubenTome/tfm-ruben">Github</a>. Una vez obetnido y descomprimido, el proyecto se
+        divide principalmente en dos carpetas:</p>
+    <ul>
+        <li>tfm-frontend: en ella se encuentra la interfaz gráfica del usuario, realizada en Angular. Es necesario
+            disponer de <span class="texto__resaltado">Node.js en su versión versión 22.14.0</span>, y los paquetes
+            necesarios se encuentran especificados en <span class="texto__resaltado">package.json</span>. Puede
+            ejecutarse la
+            interfaz, localizándose en esta carpeta, con el comando <span class="texto__resaltado">ng serve</span>.</li>
+        <li>tfm-backend: contiene la lógica de la aplicación, implementada en Fastapi y ejecutada en un servidor
+            Uvicorn.
+            Debe tenerse instalada la <span class="texto__resaltado">versión 3.9.5 de Python</span> y las dependencias
+            citadas en el archivo <span class="texto__resaltado">requirements.txt</span>. Para iniciar el servicio,
+            estando situado el usuario
+            en esta carpeta, debe ejecutar el comando <span class="texto__resaltado">fastapi dev
+                server/server.py</span>. En el proyecto, por motivos de seguridad, no se incluye la clave de acceso a la
+            base de datos, pero puede obtenerse contactando al correo <a
+                href="mailto:ruben.tome@udc.es">ruben.tome&#64;udc.es</a> y descargando el archivo en esta
+            carpeta, con el nombre <span class="texto__resaltado">private_key.json</span>.
+        </li>
+    </ul>
+
+    <h3>4. Ejecución de la aplicación en Docker</h3>
+    <p>Se han creado dos imágenes, una para la interfaz gráfica y otra para el lado servidor, disponibles a través de
+        este <a href="https://hub.docker.com/repository/docker/rubentm/tfm-container/tags">repositorio de Docker
+            Hub</a>. Deben descargarse y posteriormente ejecutarse con el comando:</p>
+    <ul class="no__punto">
+        <li>docker run -p PORT:PORT ID</li>
+    </ul>
+    <p>donde PORT es el puerto que se expone, siendo para tfm-frontend el 4200 y para tfm-backend el 8000, e ID el
+        identficador de la imagen. Una vez ejecutadas ambas, ya se puede utilizar la aplicación multicontenedor de forma
+        local, sin requerir ninguna configuración adicional.</p>
+</div>

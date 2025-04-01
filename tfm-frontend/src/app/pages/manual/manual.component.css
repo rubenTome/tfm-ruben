@@ -1,3 +1,24 @@
-:host {
-  display: block;
+h1, h2, h3, h4, h5, h6 {
+  color: #b53784;
+}
+
+p, li {
+  font-size: 20px;
+}
+
+.manual__env {
+  padding: 50px;
+  padding-bottom: 150px;
+}
+
+ul.no__punto {
+  list-style-type: none;
+}
+
+a {
+  color: #b53784;
+}
+
+.texto__resaltado {
+  font-weight: 700;
 }

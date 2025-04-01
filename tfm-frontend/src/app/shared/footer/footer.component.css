@@ -14,6 +14,11 @@ footer {
   width: 35px;
 }
 
+.imagen-docker {
+  margin-right: 10px;
+  width: 35px;
+}
+
 .nombre__env {
   margin-left: 50px;
 }

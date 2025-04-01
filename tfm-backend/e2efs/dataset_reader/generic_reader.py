@@ -11,7 +11,7 @@ def load_dataset(datasetName):
 
 def load_data(source):
     info = {
-        'train': {}, 'validation': {}, 'test': {}, 'raw': {}
+        'train': {}, 'validation': {}, 'raw': {}
     }
 
     file = source + '_train.labels'
@@ -20,9 +20,6 @@ def load_data(source):
 
     file = source + '_train.data'
     info['train']['data'] = np.loadtxt(file, dtype=np.int16).astype(np.float32)
-
-    file = source + '_test.data'
-    info['test']['data'] = np.loadtxt(file, dtype=np.int16).astype(np.float32)
 
     file = source + '_valid.labels'
     info['validation']['label'] = np.loadtxt(file, dtype=np.int16)
