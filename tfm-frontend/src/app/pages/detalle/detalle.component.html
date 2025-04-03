@@ -52,7 +52,7 @@
             <h3 class="text-center mb-3">Resultados</h3>
             <div class="col-12 py-2 d-flex justify-content-between">
                 <h5 class="m-0">Precisión de clasificación: </h5>
-                <span class="valores__exp">{{number(detalle["results"]["balanced_acc"] | mean)}}</span>
+                <span class="valores__exp">{{number(detalle["results"]["balanced_acc"] | mean | percentage)}} %</span>
             </div>
             <div class="col-12 py-2 d-flex justify-content-between">
                 <h5 class="m-0">Número de características obtenidas: </h5>
@@ -64,7 +64,7 @@
             </div>
             <div class="col-12 py-2 d-flex justify-content-between">
                 <h5 class="m-0">Duración: </h5>
-                <span class="valores__exp">{{number(detalle["results"]["duration"] | sum)}}</span>
+                <span class="valores__exp">{{number(detalle["results"]["duration"] | sum)}} seg</span>
             </div>
         </div>
         @if(detalle !== null) {

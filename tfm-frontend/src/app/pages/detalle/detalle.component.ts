@@ -7,10 +7,11 @@ import { EmissionsPlotComponent } from "./emissions-plot/emissions-plot.componen
 import { DecimalPipe } from '@angular/common';
 import { MeanPipe } from '../../pipes/mean.pipe';
 import { SumPipe } from '../../pipes/sum.pipe';
+import { PercPipe } from '../../pipes/percentage.pipe';
 
 @Component({
   selector: 'app-detalle',
-  imports: [BarPlotComponent, NgbScrollSpyModule, EmissionsPlotComponent, MeanPipe, SumPipe],
+  imports: [BarPlotComponent, NgbScrollSpyModule, EmissionsPlotComponent, MeanPipe, SumPipe, PercPipe],
   templateUrl: './detalle.component.html',
   styleUrl: './detalle.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

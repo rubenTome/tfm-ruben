@@ -29,7 +29,7 @@
                                         </div>
                                         <div class="py-2 d-flex justify-content-between w-75">
                                             <h5 class="m-0">Precisión de clasificación: </h5>
-                                            <span class="valores__exp">{{number(exp.results.balanced_acc | mean, '1.2-4')}}</span>
+                                            <span class="valores__exp">{{number(exp.results.balanced_acc | mean | percentage, '1.2-2')}} %</span>
                                         </div>
                                     </div>
                                     <div class="col mas__detalles__env">

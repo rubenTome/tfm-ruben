@@ -4,10 +4,11 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpService } from '../../services/http-service.service';
 import { MeanPipe } from '../../pipes/mean.pipe';
 import { DecimalPipe } from '@angular/common';
+import { PercPipe } from '../../pipes/percentage.pipe';
 
 @Component({
   selector: 'app-historial',
-  imports: [NgbAccordionModule, NgbPaginationModule, NgbScrollSpyModule, MeanPipe],
+  imports: [NgbAccordionModule, NgbPaginationModule, NgbScrollSpyModule, MeanPipe, PercPipe],
   templateUrl: './historial.component.html',
   styleUrl: './historial.component.css',
   changeDetection: ChangeDetectionStrategy.Default,
