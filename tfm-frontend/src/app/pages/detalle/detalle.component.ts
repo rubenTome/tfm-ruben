@@ -6,10 +6,11 @@ import { NgbScrollSpyModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmissionsPlotComponent } from "./emissions-plot/emissions-plot.component";
 import { DecimalPipe } from '@angular/common';
 import { MeanPipe } from '../../pipes/mean.pipe';
+import { SumPipe } from '../../pipes/sum.pipe';
 
 @Component({
   selector: 'app-detalle',
-  imports: [BarPlotComponent, NgbScrollSpyModule, EmissionsPlotComponent, MeanPipe],
+  imports: [BarPlotComponent, NgbScrollSpyModule, EmissionsPlotComponent, MeanPipe, SumPipe],
   templateUrl: './detalle.component.html',
   styleUrl: './detalle.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
