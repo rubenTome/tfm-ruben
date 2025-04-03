@@ -1,9 +1,11 @@
 <!-- <div ngbScrollSpy #spy="ngbScrollSpy"> -->
     <div class="mt-5">
-        <h1 class="text-center">Resultados del experimento con id:
+        <h1 class="text-center">Resultados del experimento con ID
             <span class="id__span">{{id}}</span>
         </h1>
         <div class="row mt-5 mx-5 p-4">
+            <h3 class="text-center mb-3">Hiperparámetros</h3>
+
             <div class="col-12 py-2 d-flex justify-content-between align-items-center">
                 <h5 class="m-0">Conjunto de datos: </h5>
                 <span class="valores__exp">{{detalle["dataset"]}}</span>
@@ -14,7 +16,7 @@
             </div>
             <div class="col-12 py-2 d-flex justify-content-between">
                 <h5 class="m-0">Precisión numérica del algoritmo: </h5>
-                <span class="valores__exp">{{detalle["precision"]}}</span>
+                <span class="valores__exp">{{detalle["precision"].slice(0, 2)}} bits</span>
             </div>
             <div class="col-12 py-2 d-flex justify-content-between">
                 <h5 class="m-0">Número de folds: </h5>
@@ -44,6 +46,25 @@
                 @else {
                 <span class="valores__exp">No</span>
                 }
+            </div>
+        </div>
+        <div class="row mt-5 mx-5 p-4">
+            <h3 class="text-center mb-3">Resultados</h3>
+            <div class="col-12 py-2 d-flex justify-content-between">
+                <h5 class="m-0">Precisión de clasificación: </h5>
+                <span class="valores__exp">{{number(detalle["results"]["balanced_acc"] | mean)}}</span>
+            </div>
+            <div class="col-12 py-2 d-flex justify-content-between">
+                <h5 class="m-0">Número de características obtenidas: </h5>
+                <span class="valores__exp">{{number(detalle["results"]["nfeat"] | mean, ".0-0")}}</span>
+            </div>
+            <div class="col-12 py-2 d-flex justify-content-between">
+                <h5 class="m-0">Máximo valor de alfa obtenido: </h5>
+                <span class="valores__exp">{{number(detalle["results"]["max_alpha"] | mean)}}</span>
+            </div>
+            <div class="col-12 py-2 d-flex justify-content-between">
+                <h5 class="m-0">Duración: </h5>
+                <span class="valores__exp">{{number(detalle["results"]["duration"] | mean)}}</span>
             </div>
         </div>
         @if(detalle !== null) {

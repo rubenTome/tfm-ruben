@@ -27,7 +27,6 @@ export class HomeComponent{
   datasetsOptions: string[] = [" ", "Cargando..."];
 
   precisionOptions = [
-    "",
     "16-bits en punto flotante",
     "32-bits en punto flotante",
     "64-bits en punto flotante",

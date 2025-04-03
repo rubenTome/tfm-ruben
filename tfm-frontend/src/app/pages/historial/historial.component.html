@@ -28,8 +28,8 @@
                                             <span class="valores__exp">{{exp.n_features_to_select}}</span>
                                         </div>
                                         <div class="py-2 d-flex justify-content-between w-75">
-                                            <h5 class="m-0">Precisión numérica del algoritmo: </h5>
-                                            <span class="valores__exp">{{exp.precision}}</span>
+                                            <h5 class="m-0">Precisión de clasificación: </h5>
+                                            <span class="valores__exp">{{number(exp.results.balanced_acc | mean, '1.2-4')}}</span>
                                         </div>
                                     </div>
                                     <div class="col mas__detalles__env">
