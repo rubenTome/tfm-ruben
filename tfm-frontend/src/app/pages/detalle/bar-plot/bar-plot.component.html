@@ -15,10 +15,15 @@
         </span>
         <div class="barplot__env">
             <ng-container *ngFor="let index of detalle(); track item; index as i">
+                @if (index[1] >= 0.00103) {
                 <span class="bar__elem" *ngIf="i < maxFeat"
-                    [ngStyle]="{'width': ((index[1] * 100000) - 100) + 'vw'}">{{index[0]}}</span>
+                    [ngStyle]="{'width': ((index[1] * 100000) - 100) + 'vw'}">{{index[0]}}</span>                    
+                }
             </ng-container>
+            <div class="m-2 mt-4 n__irrelevantes">... {{irrelevant}} características irrelevantes ocultas</div>
         </div>
     </div>
 
 </div>
+
+<!-- 0.00103 menos q esto de valor normalizado nn se mostra, ocultase e contase e ponde X ocultas por irrelevantes  -->

@@ -11,10 +11,18 @@ import { FormsModule } from '@angular/forms';
 })
 export class BarPlotComponent implements OnInit{
   maxFeat: any;
+  irrelevant: any = 0;
   detalle = input<any>();
   n_feat = input<number>();
 
   ngOnInit(): void {
     this.maxFeat = this.n_feat()
+    this.detalle().forEach((element: any[]) => {
+      if (element[1] < 0.00103) {
+        this.irrelevant += 1;
+      }
+    });
+    this.irrelevant -= this.maxFeat;
   } 
+  
 }
