@@ -67,7 +67,7 @@ def login(userData: dict):
     
 @app.get("/isLoggedIn")
 def authenticated():
-    if (userInfo  == {}):
+    if (userInfo  == {} or "idToken" not in userInfo or "localId" not in userInfo):
         return False
     res = requests.get(f"{bd_url}/users/{userInfo['localId']}.json?auth={userInfo['idToken']}")
     if res.status_code == 200 and res.json() != {}:
