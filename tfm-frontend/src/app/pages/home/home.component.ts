@@ -15,6 +15,12 @@ import { HttpService } from '../../services/http-service.service';
 
 export class HomeComponent{
   constructor(private httpService: HttpService, config: NgbModalConfig, private modalService: NgbModal) {
+    this.httpService.isLoggedIn().subscribe((response) => {
+      if (!response) {
+        window.location.href = "/login"
+      }
+    })
+
     this.httpService.getDatasets().subscribe((response) => {
       this.datasetsOptions = response.toString().split(",");
     });
@@ -51,7 +57,7 @@ export class HomeComponent{
 
   sendForm() {
     this.httpService.sendForm(this.paramsForm.value)
-    window.location.href = "/home/ejecucion-actual"
+    window.location.href = "/ejecucion-actual"
   }
 
   resetForm() {

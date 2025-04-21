@@ -8,11 +8,19 @@ from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.metrics import balanced_accuracy_score
 import time
 from pathlib import Path
+import requests
+
+def updateValue(req_url, obj):
+    res = requests.put(req_url, json=obj)
+    if res.status_code == 200:
+        return res.json()
+    else:
+        raise Exception("Error " + str(res.status_code) + ": " + str(res.text))
 
 def custom_sort(e):
     return - e[1]
 
-def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, network, codecarbon_tracking, ref):
+def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, network, codecarbon_tracking, bd_url, userInfo):
     try:
         startTime = int(time.time())
         maskMean = np.array([])
@@ -49,8 +57,7 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
             "progress": 0,
             "id": startTime
         }
-        ref.child("exec_info").update(status_obj)
-
+        updateValue(f"{bd_url}/users/{userInfo['localId']}/exec_info.json?auth={userInfo['idToken']}", status_obj)
         
         max_progress = k_folds * N
         
@@ -184,12 +191,12 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
                 df.loc[j] = [round(metrics["test_accuracy"], 4), round(balanced_acc, 4), nf, fi, emissions, energy, duration]
             #upate progress bar
             status_obj["progress"] = int(j / max_progress * 100)
-            ref.child("exec_info").update(status_obj)
+            updateValue(f"{bd_url}/users/{userInfo['localId']}/exec_info.json?auth={userInfo['idToken']}", status_obj)
             
         #write stats and global emissions
         status_obj["status"] = "finalizado"
         status_obj["progress"] = 100
-        ref.child("exec_info").update(status_obj)
+        updateValue(bd_url + "/users/" + userInfo["localId"] + "/exec_info.json?auth=" + userInfo["idToken"], status_obj)
         #WRITE RESULTS TO A JSON FILE TO HISTORIC
         maskMean = maskMean / (N * k_folds)
         maskMean = maskMean.tolist()
@@ -213,11 +220,12 @@ def run_experiment(ds, n_features_to_select, precision, k_folds, N, fi, wait, ne
 
             "ranking": indexedmaskMean
         }
-        ref.child("history").child(str(startTime)).set(results_dict)
+        #in this case, the function creates a new node in de database
+        updateValue(f"{bd_url}/users/{userInfo['localId']}/history/{str(startTime)}.json?auth={userInfo['idToken']}", results_dict)
 
     except  Exception as e:
         print(e)
         status_obj["status"] = "error"
         status_obj["errorMessage"] = str(e)
-        ref.child("exec_info").update(status_obj)
+        updateValue(f"{bd_url}/users/{userInfo['localId']}/exec_info.json?auth={userInfo['idToken']}", status_obj)
         return 

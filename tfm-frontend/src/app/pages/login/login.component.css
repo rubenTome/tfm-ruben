@@ -1,0 +1,45 @@
+.titulo__color {
+  color: #b53784;
+}
+
+.login__env {
+  padding: 30px;
+  background: gainsboro;
+  max-width: 992px;
+  border-radius: 10px;
+}
+
+button {
+  width: -webkit-fill-available;
+  background: #b53784;
+  border: 1px solid #b53784;
+}
+
+button:hover, button:active {
+  background: #621e48 !important;
+  border: 1px solid #621e48 !important;
+}
+
+button:focus-visible {
+  background: #621e48 ;
+  border: 1px solid #621e48 ;
+  box-shadow: 0 0 0 0.25rem #e7b1d2 ;
+}
+
+a {
+  color: #b53784;
+}
+
+a:hover {
+  color: #621e48;
+}
+
+.alert {
+  margin: 0;
+}
+
+@media screen and (max-width: 576px) {
+  .login__env {
+    padding: 10px;
+  }
+}

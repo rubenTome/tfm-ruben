@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { ExecInfoServiceService } from '../../services/exec_info-service.service';
-
+import { HttpService } from '../../services/http-service.service';
 
 @Component({
   selector: 'app-ejecucion',
@@ -16,7 +16,13 @@ export class EjecucionComponent implements OnInit, OnDestroy {
   timer: any;
   mostrarTodo: boolean = false;
 
-  constructor(private cdr: ChangeDetectorRef, private ExecInfoServiceService: ExecInfoServiceService) { 
+  constructor(private cdr: ChangeDetectorRef, private ExecInfoServiceService: ExecInfoServiceService, private httpService: HttpService) { 
+    this.httpService.isLoggedIn().subscribe((response) => {
+      if (!response) {
+        window.location.href = "/login"
+      }
+    });
+
     this.ExecInfoServiceService.getExecInfo().subscribe((response: any) => {
       this.exec_info = response
     });

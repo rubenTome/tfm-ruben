@@ -1,12 +1,25 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { HttpService } from '../../services/http-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent { 
+  constructor(private httpService: HttpService) {
+    this.isLoggedIn();
+  }
+
   state = window.location.href.split('/').pop();
+  isLoggedVar: any;
+
+  isLoggedIn() {
+    this.httpService.isLoggedIn().subscribe((response) => {
+      this.isLoggedVar = response
+    });
+  }
+  
 }

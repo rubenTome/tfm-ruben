@@ -21,7 +21,13 @@ export class DetalleComponent implements OnInit {
   id?: string|null;
   detalle: any;
 
-  constructor(private route: ActivatedRoute, private httpService:HttpService, private _decimalPipe: DecimalPipe) {}
+  constructor(private route: ActivatedRoute, private httpService:HttpService, private _decimalPipe: DecimalPipe) {
+    this.httpService.isLoggedIn().subscribe((response) => {
+      if (!response) {
+        window.location.href = "/login"
+      }
+    })
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');

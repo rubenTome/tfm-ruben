@@ -18,7 +18,13 @@ export class HistorialComponent implements OnInit{
   nPaginas = 1
   history: any;
 
-  constructor(private httpService: HttpService, private _decimalPipe: DecimalPipe) { }
+  constructor(private httpService: HttpService, private _decimalPipe: DecimalPipe) {
+    this.httpService.isLoggedIn().subscribe((response) => {
+      if (!response) {
+        window.location.href = "/login"
+      }
+    })
+  }
 
   ngOnInit() {
     this.httpService.getHistory().subscribe((response: any) => {
