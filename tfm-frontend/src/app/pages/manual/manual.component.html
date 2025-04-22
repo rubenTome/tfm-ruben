@@ -15,11 +15,7 @@
         <li>dataname_valid.labels: etiquetas del conjunto de validación.</li>
     </ul>
     <p>Es importante destacar que, tal como se deduce de lo anterior, sólo se aceptarán problemas de clasificación
-        binaria como entrada del selector de características. Finalmente, si se desea subir un conjunto de datos que no
-        esté separado en entrenamiento y validación, el formato sera el mismo, siendo necesarios tan solo los archivos
-        dataname.data (patrones) y dataname.labels (etiquetas) y desactivándose los campos relacionados con la
-        configuración de la validación cruzada</p>
-
+        binaria como entrada del selector de características.</p>
     <h3>2. Configuraciones del selector de características</h3>
     <p>El selector de características cuenta con una serie de parámetros que pueden ser configurados por el usuario para
         adaptar el proceso de selección a sus necesidades. A continuación, se detallan los parámetros que pueden ser
@@ -61,12 +57,11 @@
             citadas en el archivo <span class="texto__resaltado">requirements.txt</span>. Para iniciar el servicio,
             estando situado el usuario
             en esta carpeta, debe ejecutar el comando <span class="texto__resaltado">fastapi dev
-                server/server.py</span>. En el proyecto, por motivos de seguridad, no se incluye la clave de acceso a la
-            base de datos, pero puede obtenerse contactando al correo <a
-                href="mailto:ruben.tome@udc.es">ruben.tome&#64;udc.es</a> y descargando el archivo en esta
-            carpeta, con el nombre <span class="texto__resaltado">private_key.json</span>.
+                server/server.py</span>.
         </li>
     </ul>
+    <p>Para cualquier duda sobre la configuración del proyecto, errores o consultas sobre su uso, puede enviarse un
+        correo a <a href="mailto:ruben.tome@udc.es">ruben.tome&#64;udc.es</a></p>
 
     <h3>4. Ejecución de la aplicación en Docker</h3>
     <p>Se han creado dos imágenes, una para la interfaz gráfica y otra para el lado servidor, disponibles a través de

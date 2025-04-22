@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { ExecInfoServiceService } from '../../services/exec_info-service.service';
 import { HttpService } from '../../services/http-service.service';
@@ -8,7 +8,6 @@ import { HttpService } from '../../services/http-service.service';
   imports: [NgbProgressbarModule],
   templateUrl: './ejecucion.component.html',
   styleUrl: './ejecucion.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EjecucionComponent implements OnInit, OnDestroy {
   

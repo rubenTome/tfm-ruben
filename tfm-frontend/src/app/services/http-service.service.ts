@@ -8,9 +8,7 @@ export class HttpService {
   constructor(private http: HttpClient) {}
   
   registerUser(userData: any) {
-    return this.http.post(`http://127.0.0.1:8000/registrarse`, userData).subscribe(result => {
-      console.log(result.valueOf());
-    });
+    return this.http.post(`http://127.0.0.1:8000/registrarse`, userData);
   }
 
   loginUser(userData: any) {
