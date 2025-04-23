@@ -1,49 +1,51 @@
-<div ngbScrollSpy #spy="ngbScrollSpy" class="p-5">
-    <div ngbAccordion class="acordeon">
-        @for (exp of history; track $index) {
-            <div ngbAccordionItem>
-                <h2 ngbAccordionHeader>
-                    <button ngbAccordionButton>
-                        <div class="row">
-                            <div class="col-12 col-lg-6 titulo__elem">
-                                Experimento
-                                <span class="span__id">{{exp.id}}</span>
+<div class="historial__env p-5">
+    <div ngbScrollSpy #spy="ngbScrollSpy" class="historial">
+        <div ngbAccordion class="acordeon">
+            @for (exp of history; track $index) {
+                <div ngbAccordionItem>
+                    <h2 ngbAccordionHeader>
+                        <button ngbAccordionButton>
+                            <div class="row">
+                                <div class="col-12 col-lg-6 titulo__elem">
+                                    Experimento
+                                    <span class="span__id">{{exp.id}}</span>
+                                </div>
+                                <span class="col-12 col-lg-6 titulo__elem">({{getFecha(exp.id)}})</span>
                             </div>
-                            <span class="col-12 col-lg-6 titulo__elem">({{getFecha(exp.id)}})</span>
-                        </div>
-                    </button>
-                </h2>
-                <div ngbAccordionCollapse>
-                    <div ngbAccordionBody>
-                        <ng-template>
-                            <div class="p-3">
-                                <div class="row">
-                                    <div class="col resumen__env">
-                                        <div class="py-2 d-flex justify-content-between w-75">
-                                            <h5 class="m-0">Conjunto de datos: </h5>
-                                            <span class="valores__exp">{{exp.dataset}}</span>
+                        </button>
+                    </h2>
+                    <div ngbAccordionCollapse>
+                        <div ngbAccordionBody>
+                            <ng-template>
+                                <div class="p-3">
+                                    <div class="row">
+                                        <div class="col resumen__env">
+                                            <div class="py-2 d-flex justify-content-between w-75">
+                                                <h5 class="m-0">Conjunto de datos: </h5>
+                                                <span class="valores__exp">{{exp.dataset}}</span>
+                                            </div>
+                                            <div class="py-2 d-flex justify-content-between w-75">
+                                                <h5 class="m-0">Número de características objetivo: </h5>
+                                                <span class="valores__exp">{{exp.n_features_to_select}}</span>
+                                            </div>
+                                            <div class="py-2 d-flex justify-content-between w-75">
+                                                <h5 class="m-0">Precisión de clasificación: </h5>
+                                                <span class="valores__exp">{{number(exp.results.balanced_acc | mean | percentage, '1.2-2')}} %</span>
+                                            </div>
                                         </div>
-                                        <div class="py-2 d-flex justify-content-between w-75">
-                                            <h5 class="m-0">Número de características objetivo: </h5>
-                                            <span class="valores__exp">{{exp.n_features_to_select}}</span>
+                                        <div class="col mas__detalles__env">
+                                            <button class="btn btn-lg btn-outline-primary mr-4" (click)="irDetalle(exp.id)">Más
+                                                detalles</button>
                                         </div>
-                                        <div class="py-2 d-flex justify-content-between w-75">
-                                            <h5 class="m-0">Precisión de clasificación: </h5>
-                                            <span class="valores__exp">{{number(exp.results.balanced_acc | mean | percentage, '1.2-2')}} %</span>
-                                        </div>
-                                    </div>
-                                    <div class="col mas__detalles__env">
-                                        <button class="btn btn-lg btn-outline-primary mr-4" (click)="irDetalle(exp.id)">Más
-                                            detalles</button>
                                     </div>
                                 </div>
-                            </div>
-                        </ng-template>
+                            </ng-template>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-    <!-- <div class="d-flex justify-content-center paginacion__env">
-        <ngb-pagination [collectionSize]="50" [(page)]="nPaginas" [directionLinks]="false" />
-    </div> -->
+            }
+        <!-- <div class="d-flex justify-content-center paginacion__env">
+            <ngb-pagination [collectionSize]="50" [(page)]="nPaginas" [directionLinks]="false" />
+        </div> -->
+    </div>
 </div>

@@ -75,3 +75,14 @@ h5 {
 .fondo__color {
   background: #f9ebf4;
 }
+
+.exec__info__env {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.exec__info {
+  max-width: 1100px;
+}

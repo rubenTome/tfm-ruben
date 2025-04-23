@@ -122,3 +122,13 @@ button.btn-outline-primary:focus-visible {
   box-shadow: 0 0 0 0.25rem #f9ebf4 !important;
   color: white;
 }
+
+.historial__env {
+  display: flex;
+  justify-content: center;
+}
+
+.historial {
+  width: -webkit-fill-available;
+  max-width: 1100px;
+}
