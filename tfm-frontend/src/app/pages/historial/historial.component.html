@@ -1,3 +1,4 @@
+<h1 class="text-center mt-5">Historial de ejecuciones</h1>
 <div class="historial__env p-5">
     <div ngbScrollSpy #spy="ngbScrollSpy" class="historial">
         <div ngbAccordion class="acordeon">
@@ -30,7 +31,7 @@
                                             </div>
                                             <div class="py-2 d-flex justify-content-between w-75">
                                                 <h5 class="m-0">Precisión de clasificación: </h5>
-                                                <span class="valores__exp">{{number(exp.results.balanced_acc | mean | percentage, '1.2-2')}} %</span>
+                                                <span class="valores__exp">{{number(exp.results.balanced_acc | mean | percentage, '1.2-2')}}%</span>
                                             </div>
                                         </div>
                                         <div class="col mas__detalles__env">
