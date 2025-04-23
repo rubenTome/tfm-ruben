@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbAccordionModule, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -10,10 +10,9 @@ import { HttpService } from '../../services/http-service.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   providers: [NgbModalConfig, NgbModal],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class HomeComponent{
+export class HomeComponent {
   constructor(private httpService: HttpService, config: NgbModalConfig, private modalService: NgbModal) {
     this.httpService.isLoggedIn().subscribe((response) => {
       if (!response) {
@@ -75,6 +74,15 @@ export class HomeComponent{
 
   open(content: any) {
     this.modalService.open(content);
+  }
+
+  deleteDataset() {
+    if (this.paramsForm.value.dataset != " ") {
+      this.httpService.deleteFile(this.paramsForm.value.dataset).subscribe((response) => {
+        console.log("response:", response);
+        window.location.reload();
+      });
+    }
   }
 
   onFileSelected(event: any) {

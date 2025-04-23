@@ -2,20 +2,21 @@ button.boton__reset {
     margin-right: 100px;
 }
 
-button.btn-primary {
+button.upload__btn {
     background: #b53784;
     border: 1px solid #b53784;
+    /* border-radius: 0px; */
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
     height: 37.8px;
     width: 50px;
 }
 
-button.btn-primary:focus-visible{
+button.upload__btn:focus-visible{
     box-shadow: 0 0 0 0.25rem #e7b1d2 !important;
 }
 
-button.btn-primary:hover {
+button.upload__btn:hover {
     background: white;
     color: #b53784;
 }
@@ -52,6 +53,24 @@ button.btn-outline-primary:focus-visible {
     background-color: #b53784;
     box-shadow: 0 0 0 0.25rem #e7b1d2 !important;
     color: white;
+}
+
+.delete__btn {
+    color: white;
+    background: #6c757d;
+    border: 1px solid #6c757d;
+    margin-left: 5px;
+    height: 37.8px;
+    width: 50px;
+}
+
+.delete__btn:hover {
+    background: white;
+    color: #6c757d;
+}
+
+.delete__btn:focus-visible {
+    box-shadow: 0 0 0 0.25rem rgba(108,117,125, .5) !important;
 }
 
 span.material-icons-outlined {

@@ -41,4 +41,8 @@ export class HttpService {
   saveFile(file: FormData) {
     return this.http.put(`http://127.0.0.1:8000/dataset`, file);
   }
+
+  deleteFile(filename: any) {
+    return this.http.delete(`http://127.0.0.1:8000/delete_dataset?filename=${filename}`);
+  }
 }

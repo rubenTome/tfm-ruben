@@ -7,6 +7,7 @@ from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 sys.path.append(os.path.abspath(str(pathlib.Path(__file__).parent.resolve()) + "/../e2efs"))
 from script_alpha import run_experiment
+import shutil
 
 app = FastAPI()
 
@@ -108,6 +109,12 @@ async def get_datasets_list():
     datasetsPath = str(pathlib.Path(__file__).parent.resolve()) + "/../../tfm-backend/e2efs/datasets"
     datasets = [" "]
     datasets += os.listdir(Path(datasetsPath))
+
+    if "localId" in userInfo:
+        userDatasetsPath = str(pathlib.Path(__file__).parent.resolve()) + "/../../tfm-backend/e2efs/datasets_" + userInfo["localId"]
+        if os.path.exists(userDatasetsPath):
+            datasets += os.listdir(Path(userDatasetsPath))
+
     return datasets
 
 @app.get("/exec_info")
@@ -120,10 +127,12 @@ async def get_exec_info():
         return "Error " + str(res.status_code) + ": " + str(res.text)
 
 
-# PARA SUBIR ARCHIVOS, SOLO .ZIP QUE CONTENGA COMPRIMIDOS .DATA Y .LABELS, COMO LOS DATASETS DE FEATURE SELECTION CHALLENGE
 @app.put("/dataset/")
 async def dataset(file: UploadFile):
-    out_file_path = str(pathlib.Path(__file__).parent.resolve()) + str(Path("/../../tfm-backend/e2efs/datasets/" + file.filename))
+    #hacer esto con el token de sesion o con el uid del usuario
+    out_file_folder = str(pathlib.Path(__file__).parent.resolve()) + str(Path("/../../tfm-backend/e2efs/datasets_" + userInfo["localId"]))
+    os.mkdir(out_file_folder)
+    out_file_path = str(Path(out_file_folder + "/" +  file.filename))
     async with aiofiles.open(out_file_path, 'wb') as out_file:
         content = await file.read()
         await out_file.write(content)
@@ -134,3 +143,14 @@ async def dataset(file: UploadFile):
     os.remove(out_file_path)
 
     return {"success": file}
+
+@app.delete("/delete_dataset/")
+async def delete_dataset(filename: str):
+    if "localId" not in userInfo:
+        return "Error: user not logged in"
+    filePath = str(pathlib.Path(__file__).parent.resolve()) + str(Path("/../../tfm-backend/e2efs/datasets_" + userInfo["localId"] + "/" + filename))
+    if os.path.exists(filePath):
+        shutil.rmtree(filePath)
+        return "file deleted"
+    else:
+        return "Error: file not found"
