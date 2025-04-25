@@ -58,8 +58,6 @@ Para ejecutar este proyecto, asegúrate de tener instalados los siguientes requi
     cd tfm-frontend
     npm install
     ```
-5. Asegurarse de disponer de la clave privada de la base de datos, en un fichero llamado `private_key.json`, situado en la carpeta tfm-backend.
-
 
 ## Uso
 
@@ -79,4 +77,4 @@ Para ejecutar la aplicación, deben seguirse los siguientes pasos:
 
 ## Contacto
 
-Para obtener la clave privada de la base de datos o cualquier otra consulta, puede contactarse al correo [ruben.tome@udc.es](mailto:ruben.tome@udc.es).
+Para cualquier consulta, puede contactarse al correo [ruben.tome@udc.es](mailto:ruben.tome@udc.es).
