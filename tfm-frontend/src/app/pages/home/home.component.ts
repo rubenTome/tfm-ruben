@@ -77,7 +77,17 @@ export class HomeComponent {
   }
 
   deleteDataset() {
-    if (this.paramsForm.value.dataset != " ") {
+    if (this.paramsForm.value.dataset != " " &&
+        this.paramsForm.value.dataset != "Cargando..." &&
+        this.paramsForm.value.dataset != "colon" &&
+        this.paramsForm.value.dataset != "leukemia" &&
+        this.paramsForm.value.dataset != "lung181" &&
+        this.paramsForm.value.dataset != "lymphoma" &&
+        this.paramsForm.value.dataset != "gina" &&
+        this.paramsForm.value.dataset != "gisette" &&
+        this.paramsForm.value.dataset != "dexter" &&
+        this.paramsForm.value.dataset != "madelon"
+      ) {
       this.httpService.deleteFile(this.paramsForm.value.dataset).subscribe((response) => {
         console.log("response:", response);
         window.location.reload();
