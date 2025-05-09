@@ -45,4 +45,12 @@ export class HttpService {
   deleteFile(filename: any) {
     return this.http.delete(`http://127.0.0.1:8000/delete_dataset?filename=${filename}`);
   }
+
+  getEmail() {
+    return this.http.get(`http://127.0.0.1:8000/getEmail`);
+  }
+
+  logout() {
+    return this.http.get(`http://127.0.0.1:8000/logout`);
+  }
 }

@@ -29,3 +29,11 @@ li:hover {
 ul {
   margin-right: 30px;
 }
+
+.logout:hover {
+  cursor: pointer;
+  border-radius: 30px;
+  background-color: #b53784;
+  color: white;
+  transition-duration: 0.25s;
+}

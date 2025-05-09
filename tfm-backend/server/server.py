@@ -47,6 +47,7 @@ def resgistrarse(userData: dict):
     if res.status_code == 200:
         userInfo["idToken"] = res.json()["idToken"]#es el token de indentificacion de la sesion
         userInfo["localId"] = res.json()["localId"]#es el uid del usuario
+        userInfo["email"] = userData["email"]
         return res.json()
     else:
         return "Error " + str(res.status_code) + ": " + str(res.text)
@@ -62,9 +63,16 @@ def login(userData: dict):
     if res.status_code == 200:
         userInfo["idToken"] = res.json()["idToken"]
         userInfo["localId"] = res.json()["localId"]
+        userInfo["email"] = userData["email"]
         return res.json()
     else:
         return "Error " + str(res.status_code) + ": " + str(res.text)
+
+
+@app.get("/logout/")
+def logout():
+    userInfo.clear()
+    return "user logged out"
     
 @app.get("/isLoggedIn")
 def authenticated():
@@ -154,3 +162,10 @@ async def delete_dataset(filename: str):
         return "file deleted"
     else:
         return "Error: file not found"
+    
+@app.get("/getEmail/")
+async def get_email():
+    if "localId" not in userInfo:
+        return "Error: user not logged in"
+    else:
+        return userInfo["email"]
