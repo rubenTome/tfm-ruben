@@ -12,16 +12,16 @@
             }
             <div class="p-5">
                 @if (exec_info.status == estadosPosibles[0]) {
-                    <h1 class="col-12 text-center mb-5">Status del experimento: <span class="text-danger">error</span></h1>
+                    <h1 class="col-12 text-center mb-5">Estado del experimento: <span class="text-danger">error</span></h1>
                 }
                 @else if (exec_info.status == estadosPosibles[1]) {
-                    <h1 class="col-12 mb-5 d-flex align-items-center justify-content-center">Status del experimento: 
+                    <h1 class="col-12 mb-5 d-flex align-items-center justify-content-center">Estado del experimento: 
                         <span class="text-en-ejec">en ejecución</span>
                         <span class="material-icons-outlined stop__boton" title="Parar ejecución actual">stop_circle</span>
                     </h1>
                 }
                 @else if (exec_info.status == estadosPosibles[2]) {
-                    <h1 class="col-12 text-center mb-5">Status del experimento: <span class="text-success">ejecución terminada</span></h1>
+                    <h1 class="col-12 text-center mb-5">Estado del experimento: <span class="text-success">ejecución terminada</span></h1>
                 }
                 @if (exec_info.status == estadosPosibles[0]) {
                     <div class="mb-5">
